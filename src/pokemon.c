@@ -2254,36 +2254,15 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
-    if (fixedIV < USE_RANDOM_IVS)
-    {
-        SetBoxMonData(boxMon, MON_DATA_HP_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &fixedIV);
-    }
-    else
-    {
-        u32 iv;
-        value = Random();
+    // Guarantee all IVs are always max IVs for all pokemon created
+    u8 maxIV = MAX_PER_STAT_IVS;
+    SetBoxMonData(boxMon, MON_DATA_HP_IV, &maxIV);
+    SetBoxMonData(boxMon, MON_DATA_ATK_IV, &maxIV);
+    SetBoxMonData(boxMon, MON_DATA_DEF_IV, &maxIV);
+    SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &maxIV);
+    SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &maxIV);
+    SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &maxIV);
 
-        iv = value & MAX_IV_MASK;
-        SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
-        iv = (value & (MAX_IV_MASK << 5)) >> 5;
-        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
-        iv = (value & (MAX_IV_MASK << 10)) >> 10;
-        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
-
-        value = Random();
-
-        iv = value & MAX_IV_MASK;
-        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-        iv = (value & (MAX_IV_MASK << 5)) >> 5;
-        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-        iv = (value & (MAX_IV_MASK << 10)) >> 10;
-        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
-    }
 
     if (gSpeciesInfo[species].abilities[1])
     {
