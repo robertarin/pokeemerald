@@ -4046,6 +4046,9 @@ extern const u16 gSummaryScreen_MoveEffect_Battle_Tilemap[];
 extern const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[];
 extern const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[];
 
+extern const u32 sSplitIcons_Gfx[];
+extern const u16 sSplitIcons_Pal[];
+
 extern const u32 gMoveTypes_Gfx[];
 extern const u32 gSummaryMoveSelect_Gfx[];
 extern const u32 gSummaryMoveSelect_Pal[];
