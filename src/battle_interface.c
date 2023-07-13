@@ -185,6 +185,7 @@ static void Task_HidePartyStatusSummary_BattleStart_1(u8);
 static void Task_HidePartyStatusSummary_BattleStart_2(u8);
 static void Task_HidePartyStatusSummary_DuringBattle(u8);
 
+static void SpriteCB_Types(struct Sprite *);
 static void SpriteCB_HealthBoxOther(struct Sprite *);
 static void SpriteCB_HealthBar(struct Sprite *);
 static void SpriteCB_StatusSummaryBar_Enter(struct Sprite *);
@@ -211,6 +212,133 @@ static void Task_FreeAbilityPopUpGfx(u8);
 
 static void SpriteCB_LastUsedBall(struct Sprite *);
 static void SpriteCB_LastUsedBallWin(struct Sprite *);
+
+
+static const struct OamData sOamData_TypeIcons =
+{
+    .size = SPRITE_SIZE(32x8),
+    .shape = SPRITE_SIZE(32x8),
+    .priority = 0,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_TypeIcons =
+{
+    .data = gBattleInterface_TypeIconsGfx,
+    .size = 32*8*18/2, //32x8 for sprite size. *18 for num of types. /2 because ?
+    .tag = TAG_TYPE_ICONS,
+};
+
+static const struct SpritePalette sSpritePal_TypeIcons =
+{
+    .data = gBattleInterface_TypeIconsPal,
+    .tag = TAG_TYPE_ICONS
+};
+
+static const union AnimCmd sSpriteAnim_TypeNormal[] = {
+    ANIMCMD_FRAME(TYPE_NORMAL * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeFighting[] = {
+    ANIMCMD_FRAME(TYPE_FIGHTING * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeFlying[] = {
+    ANIMCMD_FRAME(TYPE_FLYING * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypePoison[] = {
+    ANIMCMD_FRAME(TYPE_POISON * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeGround[] = {
+    ANIMCMD_FRAME(TYPE_GROUND * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeRock[] = {
+    ANIMCMD_FRAME(TYPE_ROCK * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeBug[] = {
+    ANIMCMD_FRAME(TYPE_BUG * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeGhost[] = {
+    ANIMCMD_FRAME(TYPE_GHOST * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeSteel[] = {
+    ANIMCMD_FRAME(TYPE_STEEL * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeMystery[] = {
+    ANIMCMD_FRAME(TYPE_MYSTERY * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeFire[] = {
+    ANIMCMD_FRAME(TYPE_FIRE * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeWater[] = {
+    ANIMCMD_FRAME(TYPE_WATER * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeGrass[] = {
+    ANIMCMD_FRAME(TYPE_GRASS * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeElectric[] = {
+    ANIMCMD_FRAME(TYPE_ELECTRIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypePsychic[] = {
+    ANIMCMD_FRAME(TYPE_PSYCHIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeIce[] = {
+    ANIMCMD_FRAME(TYPE_ICE * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeDragon[] = {
+    ANIMCMD_FRAME(TYPE_DRAGON * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_TypeDark[] = {
+    ANIMCMD_FRAME(TYPE_DARK * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_TypeIcons[] =
+{
+    sSpriteAnim_TypeNormal,
+    sSpriteAnim_TypeFighting,
+    sSpriteAnim_TypeFlying,
+    sSpriteAnim_TypePoison,
+    sSpriteAnim_TypeGround,
+    sSpriteAnim_TypeRock,
+    sSpriteAnim_TypeBug,
+    sSpriteAnim_TypeGhost,
+    sSpriteAnim_TypeSteel,
+    sSpriteAnim_TypeMystery,
+    sSpriteAnim_TypeFire,
+    sSpriteAnim_TypeWater,
+    sSpriteAnim_TypeGrass,
+    sSpriteAnim_TypeElectric,
+    sSpriteAnim_TypePsychic,
+    sSpriteAnim_TypeIce,
+    sSpriteAnim_TypeDragon,
+    sSpriteAnim_TypeDark,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_TypeIcons =
+{
+    .tileTag = TAG_TYPE_ICONS,
+    .paletteTag = TAG_TYPE_ICONS,
+    .oam = &sOamData_TypeIcons,
+    .anims = sSpriteAnimTable_TypeIcons,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Types
+};
 
 static const struct OamData sOamData_64x32 =
 {
@@ -2160,6 +2288,48 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
         CpuFill32(0, (void *)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
 }
 
+#define typeIcon_TypeNum            data[0]
+#define typeIcon_HealthBoxSpriteId  data[1]
+static void CreateTypeIconSprite(u8 healthboxSpriteId, u8 type, u8 typeNum) 
+{
+    u8 typeIconSpriteId;
+    typeIconSpriteId = CreateSprite(&sSpriteTemplate_TypeIcons, 0, 0, 1);
+    StartSpriteAnim(&gSprites[typeIconSpriteId], type);
+    gSprites[typeIconSpriteId].typeIcon_TypeNum = typeNum;
+    gSprites[typeIconSpriteId].typeIcon_HealthBoxSpriteId = healthboxSpriteId;
+    gSprites[typeIconSpriteId].invisible = TRUE;
+}
+
+static void UpdateTypeIconInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
+{
+    u8 type0, type1;
+
+    LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_TypeIcons);
+    LoadSpritePalette(&sSpritePal_TypeIcons);
+
+    //TODO: Do this for both pokemon types if they're different
+    type0 = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[0];
+    type1 = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[1];
+
+    CreateTypeIconSprite(healthboxSpriteId, type0, 0);
+    if(type0 != type1) {
+        CreateTypeIconSprite(healthboxSpriteId, type1, 1);
+    }
+}
+
+static void SpriteCB_Types(struct Sprite *sprite)
+{
+    u8 healthBoxSpriteId = sprite->typeIcon_HealthBoxSpriteId;
+    u8 typeNum = sprite->typeIcon_TypeNum;
+
+    sprite->x = gSprites[healthBoxSpriteId].x + 80;
+    sprite->y = (gSprites[healthBoxSpriteId].y - 8) + (9 * typeNum); // Offset the y value for the second type
+    sprite->x2 = gSprites[healthBoxSpriteId].x2;
+    sprite->y2 = gSprites[healthBoxSpriteId].y2;
+
+    sprite->invisible = gSprites[healthBoxSpriteId].invisible;
+}
+
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
 {
     s32 i;
@@ -2400,6 +2570,8 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
     }
     else
     {
+        if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
+            UpdateTypeIconInHealthbox(healthboxSpriteId, mon);
         if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
             UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
         if (gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars)
