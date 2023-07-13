@@ -224,7 +224,7 @@ static const struct OamData sOamData_TypeIcons =
 static const struct CompressedSpriteSheet sSpriteSheet_TypeIcons =
 {
     .data = gBattleInterface_TypeIconsGfx,
-    .size = 32*8*18/2, //32x8 for sprite size. *18 for num of types. /2 because ?
+    .size = 0x1200,
     .tag = TAG_TYPE_ICONS,
 };
 
@@ -2290,7 +2290,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
 
 #define typeIcon_TypeNum            data[0]
 #define typeIcon_HealthBoxSpriteId  data[1]
-static void CreateTypeIconSprite(u8 healthboxSpriteId, u8 type, u8 typeNum) 
+static u8 CreateTypeIconSprite(u8 healthboxSpriteId, u8 type, u8 typeNum) 
 {
     u8 typeIconSpriteId;
     typeIconSpriteId = CreateSprite(&sSpriteTemplate_TypeIcons, 0, 0, 1);
@@ -2300,6 +2300,7 @@ static void CreateTypeIconSprite(u8 healthboxSpriteId, u8 type, u8 typeNum)
     gSprites[typeIconSpriteId].invisible = TRUE;
 }
 
+
 static void UpdateTypeIconInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 type0, type1;
@@ -2307,27 +2308,29 @@ static void UpdateTypeIconInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_TypeIcons);
     LoadSpritePalette(&sSpritePal_TypeIcons);
 
-    //TODO: Do this for both pokemon types if they're different
     type0 = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[0];
     type1 = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[1];
 
     CreateTypeIconSprite(healthboxSpriteId, type0, 0);
-    if(type0 != type1) {
+    if(type0 != type1) 
+    {
         CreateTypeIconSprite(healthboxSpriteId, type1, 1);
     }
 }
 
 static void SpriteCB_Types(struct Sprite *sprite)
 {
-    u8 healthBoxSpriteId = sprite->typeIcon_HealthBoxSpriteId;
     u8 typeNum = sprite->typeIcon_TypeNum;
+    u8 healthBoxSpriteId = sprite->typeIcon_HealthBoxSpriteId;
 
     sprite->x = gSprites[healthBoxSpriteId].x + 80;
     sprite->y = (gSprites[healthBoxSpriteId].y - 8) + (9 * typeNum); // Offset the y value for the second type
     sprite->x2 = gSprites[healthBoxSpriteId].x2;
     sprite->y2 = gSprites[healthBoxSpriteId].y2;
 
-    sprite->invisible = gSprites[healthBoxSpriteId].invisible;
+    // Even if type icons are set to visible, we only want to show them when 
+    //     the corresponding healthbox is also visible.
+    sprite->invisible = (gSprites[healthBoxSpriteId].invisible || !gTypeIconSpritesVisible);
 }
 
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)

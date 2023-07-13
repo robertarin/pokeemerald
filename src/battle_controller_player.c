@@ -342,6 +342,10 @@ static void HandleInputChooseAction(void)
         PlayerBufferExecCompleted();
     }
 #endif
+    else if (JOY_NEW(R_BUTTON))
+    {
+        gTypeIconSpritesVisible = !gTypeIconSpritesVisible;
+    }
 }
 
 static void UnusedEndBounceEffect(void)

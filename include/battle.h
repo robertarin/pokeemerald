@@ -995,7 +995,6 @@ extern struct FieldTimer gFieldTimers;
 extern u8 gBattlerAbility;
 extern u16 gPartnerSpriteId;
 extern struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT];
-
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
 extern struct BattleResults gBattleResults;
@@ -1009,5 +1008,6 @@ extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
+extern bool16 gTypeIconSpritesVisible;
 
 #endif // GUARD_BATTLE_H
