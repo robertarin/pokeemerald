@@ -332,6 +332,10 @@ static void HandleInputChooseAction(void)
     {
         SwapHpBarsWithHpText();
     }
+    else if (JOY_NEW(SELECT_BUTTON))
+    {
+        gTypeIconSpritesVisible = !gTypeIconSpritesVisible;
+    }
 }
 
 static void UnusedEndBounceEffect(void)
