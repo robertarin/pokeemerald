@@ -201,17 +201,11 @@
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
-#if P_EV_CAP >= GEN_6
-#define MAX_PER_STAT_EVS 252
-#else
-#define MAX_PER_STAT_EVS 255
-#endif
-#define MAX_TOTAL_EVS 510
-#if I_VITAMIN_EV_CAP >= GEN_8
-#define EV_ITEM_RAISE_LIMIT MAX_PER_STAT_EVS
-#else
-#define EV_ITEM_RAISE_LIMIT 100
-#endif
+
+// Set all EVs to 0 at all times
+#define MAX_PER_STAT_EVS 0
+#define MAX_TOTAL_EVS 0
+#define EV_ITEM_RAISE_LIMIT 0
 
 // Battle move flags
 #define FLAG_MAKES_CONTACT                        (1 << 0)
