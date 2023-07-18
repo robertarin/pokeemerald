@@ -1,4 +1,5 @@
 .set LOCALID_TWIN, 1
+.set LOCALID_FAT_MAN, 2
 .set LOCALID_MOM, 4
 .set LOCALID_RIVAL, 7
 .set LOCALID_BIRCH, 8
@@ -44,6 +45,7 @@ LittlerootTown_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_MoveMomToMaysDoor
 	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_SetTwinPos
+	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_SetFatManPos
 	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
@@ -88,6 +90,16 @@ LittlerootTown_EventScript_SetTwinPos::
 LittlerootTown_EventScript_SetTwinGuardingRoutePos::
 	setobjectxyperm LOCALID_TWIN, 7, 2
 	setobjectmovementtype LOCALID_TWIN, MOVEMENT_TYPE_FACE_DOWN
+	return
+
+LittlerootTown_EventScript_SetFatManPos::
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_SetFatManGuardingRoutePos
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 1, LittlerootTown_EventScript_SetFatManGuardingRoutePos
+	return
+
+LittlerootTown_EventScript_SetFatManGuardingRoutePos::
+	setobjectxyperm LOCALID_FAT_MAN, 12, 12
+	setobjectmovementtype LOCALID_FAT_MAN, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos::
@@ -909,6 +921,102 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	delay 30
 	return
 
+LittlerootTown_EventScript_NeedPokemonTrigger201Up::
+	lockall
+	applymovement LOCALID_FAT_MAN, LittlerootTown_Movement_FatManApproachPlayer201Up
+	waitmovement 0
+	call LittlerootTown_EventScript_DangerousWithoutPokemon201
+	applymovement LOCALID_FAT_MAN, LittlerootTown_Movement_FatManReturn201Up
+	waitmovement 0
+	releaseall
+	end
+
+LittlerootTown_EventScript_DangerousWithoutPokemon201::
+	msgbox LittlerootTown_Text_FatManWarning, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_FAT_MAN, LittlerootTown_Movement_FatManPushPlayerFromRoute201
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute201
+	waitmovement 0
+	msgbox LittlerootTown_Text_FatManDangerousIfYouDontHavePokemon, MSGBOX_DEFAULT
+	closemessage
+	return
+
+LittlerootTown_Movement_FatManApproachPlayer201Up:
+	face_right
+	delay_8
+	jump_in_place_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	delay_8
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	face_left
+	step_end
+
+LittlerootTown_Movement_FatManPushPlayerFromRoute201:
+	walk_left
+	step_end
+
+LittlerootTown_Movement_FatManReturn201Up:
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	face_down
+	step_end
+
+LittlerootTown_Movement_PushPlayerBackFromRoute201:
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
+	step_end
+
+LittlerootTown_EventScript_NeedPokemonTrigger201Down::
+	lockall
+	applymovement LOCALID_FAT_MAN, LittlerootTown_Movement_FatManApproachPlayer201Down
+	waitmovement 0
+	call LittlerootTown_EventScript_DangerousWithoutPokemon201
+	applymovement LOCALID_FAT_MAN, LittlerootTown_Movement_FatManReturn201Down
+	waitmovement 0
+	releaseall
+	end
+
+LittlerootTown_Movement_FatManApproachPlayer201Down:
+	face_right
+	delay_8
+	jump_in_place_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	delay_8
+	walk_fast_down
+	face_left
+	step_end
+
+LittlerootTown_Movement_FatManReturn201Down:
+	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	face_down
+	step_end
+
 LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "MOM: {PLAYER}, we're here, honey!\p"
 	.string "It must be tiring riding with our things\n"
@@ -977,6 +1085,15 @@ LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 LittlerootTown_Text_DangerousIfYouDontHavePokemon:
 	.string "It's dangerous if you don't have\n"
 	.string "your own POKéMON.$"
+
+LittlerootTown_Text_FatManWarning:
+	.string "Hey, kid!\p"
+	.string "Didn't your mom tell you that there's\n"
+	.string "wild pokemon out there?$"
+
+LittlerootTown_Text_FatManDangerousIfYouDontHavePokemon:
+	.string "It's dangerous if you don't have\n"
+	.string "a POKéMON of your own to protect you!$"
 
 LittlerootTown_Text_CanYouGoSeeWhatsHappening:
 	.string "Um, hi!\p"
