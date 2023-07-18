@@ -274,3 +274,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
 	call EventScript_ResetAllBerries
 	end
+
+EventScript_QuickStart::
+	setflag FLAG_SYS_B_DASH
+	end
