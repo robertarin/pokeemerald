@@ -39,12 +39,12 @@ Route201_EventScript_InfoSign::
 Route201_Text_InfoSign:
 	.string "GAUNTLETS\p"
 	.string "Routes in this game are\n"
-	.string "known as GAUNTLETS.\l"
+	.string "known as GAUNTLETS.\p"
 	.string "That means when you leave to heal,\l"
 	.string "your opponents will\n"
-	.string "heal their POKéMON as well.\l"
+	.string "heal their POKéMON as well.\p"
 	.string "Defeat every opponent\n"
-	.string "on this route without leaving\l"
+	.string "on this route without leaving\p"
 	.string "to fully clear it!$"
 
 Route201_EventScript_HouseSign::
@@ -73,7 +73,7 @@ Route201_Text_JonIntro:
 	.string "I'm glad I bought these potions.$"
 
 Route201_Text_JonDefeated:
-	.string "That was a tough fight!l"
+	.string "That was a tough fight!\l"
 	.string "You should probably go heal\n"
 	.string "your POKéMON before moving on.$"
 
