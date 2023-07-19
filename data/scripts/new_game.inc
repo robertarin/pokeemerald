@@ -275,6 +275,27 @@ EventScript_ResetAllMapFlags::
 	call EventScript_ResetAllBerries
 	end
 
-EventScript_QuickStart::
+EventScript_SuncloakStart::
+	@ FLAG_ADVENTURE_STARTED lets us go past OldaleTown and buy pokeballs from OldaleTown_Mart.
+	setflag FLAG_ADVENTURE_STARTED
+
+	@ Enable running shoes.
+	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_SYS_B_DASH
+
+	@ Get clock events running.
+	special SetWallClockToDefaults
+	setflag FLAG_SET_WALL_CLOCK
+
+	@ Pokedex
+	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	special SetUnlockedPokedexFlags
+	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 2 	@Usually when you get your pokedex this is set to 1, but who needs a tutorial anyways
+
+	@ Hide some of the old tutorial state NPCs and objects. I don't feel like removing these quite yet.
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
+	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
+	setflag FLAG_HIDE_ROUTE_103_RIVAL
 	end

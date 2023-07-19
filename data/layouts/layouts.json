@@ -4430,6 +4430,16 @@
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/Route201_House1/border.bin",
       "blockdata_filepath": "data/layouts/Route201_House1/map.bin"
+    },
+    {
+      "id": "LAYOUT_SUNCLOAK_TOWN",
+      "name": "SuncloakTown_Layout",
+      "width": 40,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/SuncloakTown/border.bin",
+      "blockdata_filepath": "data/layouts/SuncloakTown/map.bin"
     }
   ]
 }

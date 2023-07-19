@@ -1,14 +1,6 @@
 {
   "map_sections": [
     {
-      "map_section": "MAPSEC_LITTLEROOT_TOWN",
-      "name": "LITTLEROOT TOWN",
-      "x": 4,
-      "y": 11,
-      "width": 1,
-      "height": 1
-    },
-    {
       "map_section": "MAPSEC_OLDALE_TOWN",
       "name": "OLDALE TOWN",
       "x": 4,
@@ -1706,8 +1698,16 @@
     },
     {
       "map_section": "MAPSEC_ROUTE_201",
-      "name": "ROUTE 201",
+      "name": "Route 201",
       "x": 5,
+      "y": 11,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "map_section": "MAPSEC_SUNCLOAK_TOWN",
+      "name": "Suncloak Town",
+      "x": 4,
       "y": 11,
       "width": 1,
       "height": 1

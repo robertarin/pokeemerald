@@ -47,10 +47,10 @@
 #include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
-extern const u8 EventScript_QuickStart[];
+extern const u8 EventScript_SuncloakStart[];
 
 static void ClearFrontierRecord(void);
-static void WarpToTruck(void);
+static void WarpToStart(void);
 static void ResetMiniGamesRecords(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
@@ -125,9 +125,9 @@ static void ClearFrontierRecord(void)
     gSaveBlock2Ptr->frontier.opponentNames[1][0] = EOS;
 }
 
-static void WarpToTruck(void)
+static void WarpToStart(void)
 {
-    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(SUNCLOAK_TOWN), MAP_NUM(SUNCLOAK_TOWN), WARP_ID_NONE, 9, 10);
     WarpIntoMap();
 }
 
@@ -193,8 +193,9 @@ void NewGameInitData(void)
     InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
-    WarpToTruck();
+    WarpToStart();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
+    RunScriptImmediately(EventScript_SuncloakStart);
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
@@ -205,7 +206,6 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
-    RunScriptImmediately(EventScript_QuickStart);
 }
 
 static void ResetMiniGamesRecords(void)
