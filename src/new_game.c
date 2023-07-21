@@ -45,6 +45,7 @@
 #include "mystery_gift.h"
 #include "union_room_chat.h"
 #include "constants/items.h"
+#include "starter_choose.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 extern const u8 EventScript_SuncloakStart[];
@@ -196,6 +197,7 @@ void NewGameInitData(void)
     WarpToStart();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     RunScriptImmediately(EventScript_SuncloakStart);
+    AddStarterPokemonToPlayer();
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();

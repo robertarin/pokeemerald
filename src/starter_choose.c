@@ -24,8 +24,6 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-#define STARTER_MON_COUNT   3
-
 // Position of the sprite of the selected starter Pokemon
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
 #define STARTER_PKMN_POS_Y 64
@@ -112,9 +110,11 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
 
 static const u16 sStarterMon[STARTER_MON_COUNT] =
 {
-    SPECIES_TREECKO,
-    SPECIES_TORCHIC,
-    SPECIES_MUDKIP,
+    SPECIES_MAREEP,
+    SPECIES_PHANPY,
+    SPECIES_ARON,
+    SPECIES_ODDISH,
+    SPECIES_CLEFAIRY,
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -460,6 +460,33 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].sBallId = 2;
 
     sStarterLabelWindowId = WINDOW_NONE;
+}
+
+u16 gStarterPokemonSpecies = SPECIES_NONE;
+void AddStarterPokemonToPlayer()
+{
+    if(gStarterPokemonSpecies == SPECIES_NONE)
+    {
+        // Starter hasn't been set.
+        return;
+    }
+
+    struct Pokemon mon;
+    u16 nationalDexNum;
+    u8 sentToPc;
+    CreateMon(&mon, gStarterPokemonSpecies, 5, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    sentToPc = GiveMonToPlayer(&mon);
+    nationalDexNum = SpeciesToNationalPokedexNum(gStarterPokemonSpecies);
+
+    // Don't set Pokédex flag for MON_CANT_GIVE
+    switch(sentToPc)
+    {
+    case MON_GIVEN_TO_PARTY:
+    case MON_GIVEN_TO_PC:
+        GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
+        GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
+        break;
+    }
 }
 
 static void CB2_StarterChoose(void)

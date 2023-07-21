@@ -37,6 +37,8 @@
 #include "title_screen.h"
 #include "window.h"
 #include "mystery_gift_menu.h"
+#include "starter_choose.h"
+#include "data.h"
 
 /*
  * Main menu state machine
@@ -143,9 +145,22 @@
  * Task_NewGameBirchSpeech_SoItsPlayerName
  * Task_NewGameBirchSpeech_CreateNameYesNo
  * Task_NewGameBirchSpeech_ProcessNameYesNoMenu
- *  - If confirmed, advance to Task_NewGameBirchSpeech_SlidePlatformAway2.
+ *  - If confirmed, advance to Task_NewGameBirchSpeech_SlidePlatformAwayStarter.
  *  - Otherwise, return to Task_NewGameBirchSpeech_BoyOrGirl.
  *
+ * Task_NewGameBirchSpeech_SlidePlatformAwayStarter
+ * Task_NewGameSpeech_StartStarterMonFadeIn
+ * Task_NewGameSpeech_WaitForStarterMonFadeIn
+ * Task_NewGameSpeech_WhichStarter
+ * Task_NewGameSpeech_WaitToShowStarterMenu
+ * NewGameSpeech_ShowStarterMenu
+ * NewGameSpeech_ProcessStarterMenuInput
+ * NewGameSpeech_ClearStarterWindow
+ * Task_NewGameSpeech_SlideOutOldStarterSprite
+ * Task_NewGameSpeech_SlideInNewStarterSprite
+ * Task_NewGameSpeech_ChooseStarter
+ *  - Advances to Task_NewGameBirchSpeech_SlidePlatformAway2
+ * 
  * Task_NewGameBirchSpeech_SlidePlatformAway2
  * Task_NewGameBirchSpeech_ReshowBirchLotad
  * Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter
@@ -154,6 +169,7 @@
  * Task_NewGameBirchSpeech_WaitForPlayerShrink
  * Task_NewGameBirchSpeech_FadePlayerToWhite
  * Task_NewGameBirchSpeech_Cleanup
+ *  - Now also calls DestroyStarterSprites
  *  - Advances to CB2_NewGame.
  *
  * Task_NewGameBirchSpeechSub_InitPokeball
@@ -170,6 +186,7 @@
 
 static EWRAM_DATA bool8 sStartedPokeBallTask = 0;
 static EWRAM_DATA u16 sCurrItemAndOptionMenuCheck = 0;
+static EWRAM_DATA u8 sStarterSpriteIds[STARTER_MON_COUNT];
 
 static u8 sBirchSpeechMainTaskId;
 
@@ -243,6 +260,19 @@ static void MainMenu_FormatSavegamePokedex(void);
 static void MainMenu_FormatSavegameTime(void);
 static void MainMenu_FormatSavegameBadges(void);
 static void NewGameBirchSpeech_CreateDialogueWindowBorder(u8, u8, u8, u8, u8, u8);
+
+static void Task_NewGameBirchSpeech_SlidePlatformAwayStarter(u8);
+static void Task_NewGameSpeech_StartStarterMonFadeIn(u8);
+static void Task_NewGameSpeech_WaitForStarterMonFadeIn(u8);
+static void Task_NewGameSpeech_WhichStarter(u8);
+static void Task_NewGameSpeech_WaitToShowStarterMenu(u8);
+static void Task_NewGameSpeech_ChooseStarter(u8);
+static void NewGameSpeech_ShowStarterMenu(void);
+static s8 NewGameSpeech_ProcessStarterMenuInput(void);
+static void NewGameSpeech_ClearStarterWindow(u8, u8);
+static void Task_NewGameSpeech_SlideOutOldStarterSprite(u8);
+static void Task_NewGameSpeech_SlideInNewStarterSprite(u8);
+static void DestroyStarterSprites();
 
 // .rodata
 
@@ -1260,6 +1290,8 @@ static void HighlightSelectedMainMenuItem(u8 menuType, u8 selectedMenuItem, s16 
 #define tLotadSpriteId data[9]
 #define tBrendanSpriteId data[10]
 #define tMaySpriteId data[11]
+#define tStarterSpriteId data[12]
+#define tStarterSelection data[13]
 
 static void Task_NewGameBirchSpeech_Init(u8 taskId)
 {
@@ -1631,12 +1663,155 @@ static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
             gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             NewGameBirchSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
             NewGameBirchSpeech_StartFadePlatformIn(taskId, 1);
-            gTasks[taskId].func = Task_NewGameBirchSpeech_SlidePlatformAway2;
+            gTasks[taskId].func = Task_NewGameBirchSpeech_SlidePlatformAwayStarter;
             break;
         case MENU_B_PRESSED:
         case 1:
             PlaySE(SE_SELECT);
             gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;
+    }
+}
+
+static void Task_NewGameSpeech_StartStarterMonFadeIn(u8 taskId)
+{
+    if (gTasks[taskId].tIsDoneFadingSprites)
+    {
+        gSprites[gTasks[taskId].tBirchSpriteId].invisible = TRUE;
+        gSprites[gTasks[taskId].tLotadSpriteId].invisible = TRUE;
+        gSprites[gTasks[taskId].tPlayerSpriteId].invisible = TRUE;
+
+        u8 spriteId = gTasks[taskId].tStarterSpriteId;
+        gSprites[spriteId].invisible = FALSE;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
+        NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
+        gTasks[taskId].func = Task_NewGameSpeech_WaitForStarterMonFadeIn;
+    }
+}
+
+static void Task_NewGameSpeech_WaitForStarterMonFadeIn(u8 taskId)
+{
+    if (gTasks[taskId].tIsDoneFadingSprites)
+    {
+        gSprites[gTasks[taskId].tStarterSpriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
+        gTasks[taskId].func = Task_NewGameSpeech_WhichStarter;
+    }
+}
+
+static void Task_NewGameSpeech_WhichStarter(u8 taskId)
+{
+    gTasks[taskId].tStarterSelection = 0;
+    NewGameBirchSpeech_ClearWindow(0);
+    StringExpandPlaceholders(gStringVar4, gText_Birch_WhatStarter);
+    AddTextPrinterForMessage(TRUE);
+    gTasks[taskId].func = Task_NewGameSpeech_WaitToShowStarterMenu;
+}
+
+static void Task_NewGameSpeech_WaitToShowStarterMenu(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        NewGameSpeech_ShowStarterMenu();
+        gTasks[taskId].func = Task_NewGameSpeech_ChooseStarter;
+    }
+}
+
+static void Task_NewGameSpeech_ChooseStarter(u8 taskId)
+{
+    int menuInputStarter = Menu_ProcessInput();
+    int menuInputStarter2;
+
+    if(menuInputStarter != MENU_NOTHING_CHOSEN) {
+        PlaySE(SE_SELECT);
+        gStarterPokemonSpecies = GetStarterPokemon(menuInputStarter);
+        NewGameBirchSpeech_ClearGenderWindow(2, 1);
+        gSprites[gTasks[taskId].tStarterSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        NewGameBirchSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
+        NewGameBirchSpeech_StartFadePlatformIn(taskId, 1);
+        gTasks[taskId].func = Task_NewGameBirchSpeech_SlidePlatformAway2;
+    }
+
+    menuInputStarter2 = Menu_GetCursorPos();
+
+    if (menuInputStarter2 != gTasks[taskId].tStarterSelection)
+    {
+        gTasks[taskId].tStarterSelection = menuInputStarter2;
+        gSprites[sStarterSpriteIds[gTasks[taskId].tStarterSelection]].oam.objMode = ST_OAM_OBJ_BLEND;
+        NewGameBirchSpeech_StartFadeOutTarget1InTarget2(taskId, 0);
+        gTasks[taskId].func = Task_NewGameSpeech_SlideOutOldStarterSprite;
+    }
+}
+
+static void Task_NewGameSpeech_SlideOutOldStarterSprite(u8 taskId)
+{
+    u8 spriteId = gTasks[taskId].tStarterSpriteId;
+    u8 currentSelection = gTasks[taskId].tStarterSelection;
+    if (gTasks[taskId].tIsDoneFadingSprites == 0)
+    {
+        gSprites[spriteId].x += 4;
+    }
+    else
+    {
+        gSprites[spriteId].invisible = TRUE;
+        spriteId = sStarterSpriteIds[currentSelection];
+        gSprites[spriteId].x = DISPLAY_WIDTH;
+        gSprites[spriteId].y = 60;
+        gSprites[spriteId].invisible = FALSE;
+        gTasks[taskId].tStarterSpriteId = spriteId;
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 0);
+        gTasks[taskId].func = Task_NewGameSpeech_SlideInNewStarterSprite;
+    }
+}
+
+static void Task_NewGameSpeech_SlideInNewStarterSprite(u8 taskId)
+{
+    u8 currentSelection = gTasks[taskId].tStarterSelection;
+    u8 spriteId = sStarterSpriteIds[currentSelection];
+
+    if (gSprites[spriteId].x > 180)
+    {
+        gSprites[spriteId].x -= 4;
+    }
+    else
+    {
+        gSprites[spriteId].x = 180;
+        if (gTasks[taskId].tIsDoneFadingSprites)
+        {
+            gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
+            gTasks[taskId].func = Task_NewGameSpeech_ChooseStarter;
+        }
+    }
+}
+
+static void NewGameSpeech_ShowStarterMenu(void)
+{
+    struct MenuAction sMenuActions_Starter[STARTER_MON_COUNT];
+    u8 i;
+    for (i = 0; i < STARTER_MON_COUNT; i++)
+    {
+        sMenuActions_Starter[i].text = gSpeciesNames[GetStarterPokemon(i)];
+    }
+
+    DrawMainMenuWindowBorder(&sNewGameBirchSpeechTextWindows[2], 0xF3);
+    FillWindowPixelBuffer(2, PIXEL_FILL(1));
+    PrintMenuTable(2, ARRAY_COUNT(sMenuActions_Starter), sMenuActions_Starter);
+    InitMenuInUpperLeftCornerNormal(2, ARRAY_COUNT(sMenuActions_Starter), 0);
+    PutWindowTilemap(2);
+    CopyWindowToVram(2, COPYWIN_FULL);
+}
+
+static void Task_NewGameBirchSpeech_SlidePlatformAwayStarter(u8 taskId)
+{
+    if (gTasks[taskId].tBG1HOFS != -60)
+    {
+        gTasks[taskId].tBG1HOFS -= 2;
+        SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].tBG1HOFS);
+    }
+    else
+    {
+        gTasks[taskId].tBG1HOFS = -60;
+        gTasks[taskId].func = Task_NewGameSpeech_StartStarterMonFadeIn;
     }
 }
 
@@ -1646,6 +1821,9 @@ static void Task_NewGameBirchSpeech_SlidePlatformAway2(u8 taskId)
     {
         gTasks[taskId].tBG1HOFS += 2;
         SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].tBG1HOFS);
+
+        // Also set the starter sprite to follow the platform off the screen here?
+        gSprites[gTasks[taskId].tStarterSpriteId].x -=2;
     }
     else
     {
@@ -1659,6 +1837,7 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
 
     if (gTasks[taskId].tIsDoneFadingSprites)
     {
+        gSprites[gTasks[taskId].tStarterSpriteId].invisible = TRUE;
         gSprites[gTasks[taskId].tBrendanSpriteId].invisible = TRUE;
         gSprites[gTasks[taskId].tMaySpriteId].invisible = TRUE;
         spriteId = gTasks[taskId].tBirchSpriteId;
@@ -1778,9 +1957,18 @@ static void Task_NewGameBirchSpeech_Cleanup(u8 taskId)
     {
         FreeAllWindowBuffers();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tLotadSpriteId);
+        DestroyStarterSprites();
         ResetAllPicSprites();
         SetMainCallback2(CB2_NewGame);
         DestroyTask(taskId);
+    }
+}
+
+static void DestroyStarterSprites()
+{
+    u8 i;
+    for(i = 0; i < STARTER_MON_COUNT; i++) {
+        FreeAndDestroyMonPicSprite(sStarterSpriteIds[i]);
     }
 }
 
@@ -1905,6 +2093,19 @@ static void AddBirchSpeechObjects(u8 taskId)
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;
     gTasks[taskId].tMaySpriteId = maySpriteId;
+
+    // Create the starter pokemon sprites
+    u8 i;
+    for (i = 0; i < STARTER_MON_COUNT; i++) {
+        u16 pokeName = GetStarterPokemon(i);
+        sStarterSpriteIds[i] = CreateMonPicSprite_Affine(GetStarterPokemon(i), SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, 180, 60, 0, gMonPaletteTable[pokeName].tag);
+        gSprites[sStarterSpriteIds[i]].callback = SpriteCB_Null;
+        gSprites[sStarterSpriteIds[i]].invisible = TRUE;
+        gSprites[sStarterSpriteIds[i]].oam.priority = 0;
+    }
+
+    // Default tStarterSpriteId to whatever is in the first slot
+    gTasks[taskId].tStarterSpriteId = sStarterSpriteIds[0];
 }
 
 #undef tPlayerSpriteId
@@ -1914,6 +2115,8 @@ static void AddBirchSpeechObjects(u8 taskId)
 #undef tLotadSpriteId
 #undef tBrendanSpriteId
 #undef tMaySpriteId
+#undef tStarterSpriteId
+#undef tStarterSelection
 
 #define tMainTask data[0]
 #define tAlphaCoeff1 data[1]

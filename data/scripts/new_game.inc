@@ -287,14 +287,19 @@ EventScript_SuncloakStart::
 	special SetWallClockToDefaults
 	setflag FLAG_SET_WALL_CLOCK
 
-	@ Pokedex
-	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	@ Pokedex + Pokemon flags
+	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_SYS_POKEDEX_GET
 	special SetUnlockedPokedexFlags
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
+	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 2 	@Usually when you get your pokedex this is set to 1, but who needs a tutorial anyways
 
 	@ Hide some of the old tutorial state NPCs and objects. I don't feel like removing these quite yet.
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
+	setvar VAR_ROUTE101_STATE, 3
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setflag FLAG_HIDE_ROUTE_103_RIVAL
