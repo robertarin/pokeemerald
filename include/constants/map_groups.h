@@ -402,6 +402,7 @@
 #define MAP_TERRA_CAVE_END                           (105 | (24 << 8))
 #define MAP_ALTERING_CAVE                            (106 | (24 << 8))
 #define MAP_METEOR_FALLS_STEVENS_CAVE                (107 | (24 << 8))
+#define MAP_SUNCLOAK_DEPTHS                          (108 | (24 << 8))
 
 // gMapGroup_IndoorDynamic
 #define MAP_SECRET_BASE_RED_CAVE1    (0 | (25 << 8))
@@ -596,6 +597,13 @@
 // gMapGroup_IndoorRoute201
 #define MAP_ROUTE201_HOUSE1 (0 | (34 << 8))
 
-#define MAP_GROUPS_COUNT 35
+// gMapGroup_IndoorSuncloak
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE  (0 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE2 (1 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_HOUSE1        (2 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_HOUSE2        (3 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_LAB           (4 | (35 << 8))
+
+#define MAP_GROUPS_COUNT 36
 
 #endif // GUARD_CONSTANTS_MAP_GROUPS_H

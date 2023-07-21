@@ -34,7 +34,8 @@
     "gMapGroup_IndoorRoute123",
     "gMapGroup_IndoorRoute119",
     "gMapGroup_IndoorRoute124",
-    "gMapGroup_IndoorRoute201"
+    "gMapGroup_IndoorRoute201",
+    "gMapGroup_IndoorSuncloak"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -432,7 +433,8 @@
     "TerraCave_Entrance",
     "TerraCave_End",
     "AlteringCave",
-    "MeteorFalls_StevensCave"
+    "MeteorFalls_StevensCave",
+    "Suncloak_Depths"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",
@@ -626,5 +628,12 @@
   ],
   "gMapGroup_IndoorRoute201": [
     "Route201_House1"
+  ],
+  "gMapGroup_IndoorSuncloak": [
+    "SuncloakTown_PlayerHouse",
+    "SuncloakTown_PlayerHouse2",
+    "SuncloakTown_House1",
+    "SuncloakTown_House2",
+    "SuncloakTown_Lab"
   ]
 }
