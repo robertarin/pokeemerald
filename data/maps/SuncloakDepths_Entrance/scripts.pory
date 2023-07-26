@@ -1,0 +1,9 @@
+mapscripts SuncloakDepths_Entrance_MapScripts {}
+
+script SuncloakDepths_Entrance_EventScript_Coal {
+	lock
+	faceplayer
+	msgbox(format("Welcome to Suncloak Depths!"))
+	release
+	end
+}

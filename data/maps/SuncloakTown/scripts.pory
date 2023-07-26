@@ -1,0 +1,11 @@
+mapscripts SuncloakTown_MapScripts {}
+
+script Sign_SuncloakDepths {
+	lockall
+	msgbox("Suncloak Depths\p"
+		   "Active research site - \p"
+		   "admission by permission of\n"
+		   "Hoenn Research Institute only.")
+	releaseall
+	end
+}

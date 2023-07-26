@@ -6,6 +6,31 @@ gText_Birch_Welcome::
 	.string "PROFESSOR.\p"
 	.string "$"
 
+gText_Coal_Welcome::
+	.string "Hello and good afternoon everyone!\p"
+	.string "My name is Professor Coal and ...\p"
+	.string "... sorry, one moment please.\p"
+	.string "$"
+
+gText_Coal_UseFlash::
+	.string "Pikachu! Use Flash!\p"
+	.string "$"
+
+gText_Coal_Sorry::
+	.string "Sorry about that!\p"
+	.string "When you've been delving as long\n"
+	.string "as I have, you get quite used to\l"
+	.string "the dark.\p"
+	.string "$"
+
+gText_Coal_MainSpeech::
+	.string "Anyway, congratulations on your\n"
+	.string "acceptance to the prestigious\l"
+	.string "Hoenn Research Institute!\p"
+	.string "Today in your orientation you will\n"
+	.string "learn how we do things around here!\p"
+	.string "$"
+
 gText_Birch_Pokemon::
 	.string "This is what we call a “POKéMON.”\p"
 	.string "\n"
@@ -29,21 +54,21 @@ gText_Birch_MainSpeech::
 	.string "$"
 
 gText_Birch_AndYouAre::
-	.string "And you are?$"
+	.string "But first, let's introduce ourselves.$"
 
 gText_Birch_BoyOrGirl::
 	.string "Are you a boy?\n"
 	.string "Or are you a girl?$"
 
 gText_Birch_WhatStarter::
-	.string "Starter choice!$"
+	.string "And what POKéMON\n"
+	.string "do you have with you?$"
 
 gText_Birch_WhatsYourName::
-	.string "All right.\n"
-	.string "What's your name?$"
+	.string "And what's your name?$"
 
 gText_Birch_SoItsPlayer::
-	.string "So it's {PLAYER}{KUN}?$"
+	.string "Welcome {PLAYER}{KUN}!$"
 
 gText_Birch_YourePlayer::
 	.string "Ah, okay!\p"
@@ -53,12 +78,7 @@ gText_Birch_YourePlayer::
 	.string "$"
 
 gText_Birch_AreYouReady::
-	.string "All right, are you ready?\p"
-	.string "Your very own adventure is about\n"
-	.string "to unfold.\p"
-	.string "Take courage, and leap into the\n"
-	.string "world of POKéMON where dreams,\l"
-	.string "adventure, and friendships await!\p"
-	.string "Well, I'll be expecting you later.\n"
-	.string "Come see me in my POKéMON LAB.\p"
+	.string "Fantastic!\p"
+	.string "Now that we all know each other,\n"
+	.string "let's get started!\p"
 	.string "$"

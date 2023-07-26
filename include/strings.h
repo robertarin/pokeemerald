@@ -394,6 +394,12 @@ extern const u8 gText_DefaultNameTerra[];
 extern const u8 gText_DefaultNameLucy[];
 extern const u8 gText_DefaultNameHalie[];
 
+// Coal intro text
+extern const u8 gText_Coal_Welcome[];
+extern const u8 gText_Coal_UseFlash[];
+extern const u8 gText_Coal_Sorry[];
+extern const u8 gText_Coal_MainSpeech[];
+
 extern const u8 gText_BirchInTrouble[];
 extern const u8 gText_ConfirmStarterChoice[];
 
