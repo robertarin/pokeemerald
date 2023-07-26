@@ -272,6 +272,7 @@ static s8 NewGameSpeech_ProcessStarterMenuInput(void);
 static void NewGameSpeech_ClearStarterWindow(u8, u8);
 static void Task_NewGameSpeech_SlideOutOldStarterSprite(u8);
 static void Task_NewGameSpeech_SlideInNewStarterSprite(u8);
+static void CreateStarterSprites(u8);
 static void DestroyStarterSprites();
 
 // .rodata
@@ -1663,6 +1664,7 @@ static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
             gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
             NewGameBirchSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
             NewGameBirchSpeech_StartFadePlatformIn(taskId, 1);
+            CreateStarterSprites(taskId);
             gTasks[taskId].func = Task_NewGameBirchSpeech_SlidePlatformAwayStarter;
             break;
         case MENU_B_PRESSED:
@@ -2093,7 +2095,10 @@ static void AddBirchSpeechObjects(u8 taskId)
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;
     gTasks[taskId].tMaySpriteId = maySpriteId;
+}
 
+static void CreateStarterSprites(u8 taskId)
+{
     // Create the starter pokemon sprites
     u8 i;
     for (i = 0; i < STARTER_MON_COUNT; i++) {
