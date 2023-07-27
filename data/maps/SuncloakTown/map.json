@@ -104,7 +104,7 @@
       "x": 18,
       "y": 10,
       "elevation": 0,
-      "dest_map": "MAP_SUNCLOAK_DEPTHS",
+      "dest_map": "MAP_SUNCLOAK_DEPTHS_ENTRANCE",
       "dest_warp_id": "0"
     },
     {

@@ -307,4 +307,8 @@ EventScript_SuncloakStart::
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setflag FLAG_HIDE_ROUTE_103_RIVAL
+	
+	@ Suncloak intro management
+	setvar VAR_SUNCLOAK_TUTORIAL_STATE, 1
+	
 	end

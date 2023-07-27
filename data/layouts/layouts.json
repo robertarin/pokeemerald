@@ -4482,14 +4482,14 @@
       "blockdata_filepath": "data/layouts/SuncloakTown_House2/map.bin"
     },
     {
-      "id": "LAYOUT_SUNCLOAK_DEPTHS",
-      "name": "Suncloak_Depths_Layout",
+      "id": "LAYOUT_SUNCLOAK_DEPTHS_ENTRANCE",
+      "name": "SuncloakDepths_Entrance_Layout",
       "width": 14,
       "height": 12,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/Suncloak_Depths/border.bin",
-      "blockdata_filepath": "data/layouts/Suncloak_Depths/map.bin"
+      "border_filepath": "data/layouts/SuncloakDepths_Entrance/border.bin",
+      "blockdata_filepath": "data/layouts/SuncloakDepths_Entrance/map.bin"
     },
     {
       "id": "LAYOUT_SUNCLOAK_TOWN_LAB",
@@ -4500,6 +4500,16 @@
       "secondary_tileset": "gTileset_Lab",
       "border_filepath": "data/layouts/SuncloakTown_Lab/border.bin",
       "blockdata_filepath": "data/layouts/SuncloakTown_Lab/map.bin"
+    },
+    {
+      "id": "LAYOUT_SUNCLOAK_DEPTHS_B1F",
+      "name": "SuncloakDepths_B1F_Layout",
+      "width": 35,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/SuncloakDepths_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/SuncloakDepths_B1F/map.bin"
     }
   ]
 }

@@ -1,0 +1,16 @@
+// State descriptions for VAR_SUNCLOAK_TUTORIAL_STATE
+// 1: First time in Suncloak Depths. Coal used Flash for you
+// 2: Coal sent you out? idk
+// 3: TBD
+// 4: TBD
+
+mapscripts SuncloakDepths_B1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION : SuncloakDepths_B1F_OnTransition
+}
+
+script SuncloakDepths_B1F_OnTransition {
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 1) {
+        setflashlevel(1)
+        setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 2)
+    }
+}
