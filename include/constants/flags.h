@@ -1501,10 +1501,10 @@
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
-#define FLAG_TRAINERS_DEFEATED_ROUTE_201            (SYSTEM_FLAGS + 0x85) // Unused Flag
-#define FLAG_UNUSED_0x8E6                           (SYSTEM_FLAGS + 0x86) // Unused Flag
-#define FLAG_UNUSED_0x8E7                           (SYSTEM_FLAGS + 0x87) // Unused Flag
-#define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
+#define FLAG_TRAINERS_DEFEATED_ROUTE_201            (SYSTEM_FLAGS + 0x85)
+#define FLAG_SUNCLOAK_DEPTHS_HIDE_COAL              (SYSTEM_FLAGS + 0x86)
+#define FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS             (SYSTEM_FLAGS + 0x87)
+#define FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY             (SYSTEM_FLAGS + 0x88)
 #define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
 #define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
 #define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag

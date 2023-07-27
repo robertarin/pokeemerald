@@ -277,6 +277,11 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	setflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
 	call EventScript_ResetAllBerries
+
+	@ New flags start here
+	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_COAL
+	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS
+	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY
 	end
 
 EventScript_SuncloakStart::
@@ -310,5 +315,4 @@ EventScript_SuncloakStart::
 	
 	@ Suncloak intro management
 	setvar VAR_SUNCLOAK_TUTORIAL_STATE, 1
-	
 	end

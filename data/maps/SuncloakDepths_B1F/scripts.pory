@@ -1,16 +1,156 @@
+const COAL_ID = 1
+
 // State descriptions for VAR_SUNCLOAK_TUTORIAL_STATE
-// 1: First time in Suncloak Depths. Coal used Flash for you
-// 2: Coal sent you out? idk
+// 1: First time in Suncloak Depths. Coal used Flash for you.
+// 2: Initial Coal speech is done.
 // 3: TBD
 // 4: TBD
 
 mapscripts SuncloakDepths_B1F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION : SuncloakDepths_B1F_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_SUNCLOAK_TUTORIAL_STATE, 1: SuncloakDepths_B1F_OnWarp_SetPlayerForIntro
+    ]
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_SUNCLOAK_TUTORIAL_STATE, 1: SuncloakDepths_B1F_OnFrame_IntroCoalSpeech
+    ]
 }
 
 script SuncloakDepths_B1F_OnTransition {
     if(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 1) {
+        clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_COAL)
+        clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS)
+        clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY)
         setflashlevel(1)
-        setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 2)
     }
+}
+
+script SuncloakDepths_B1F_OnWarp_SetPlayerForIntro {
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+}
+
+script SuncloakDepths_B1F_OnFrame_IntroCoalSpeech {
+    lock
+    applymovement(COAL_ID, CoalSpeech_WalkLeft)
+    msgbox(format("When Suncloak town was founded the residents"
+                    "discovered that the caves beneath had hundreds of fantastic crystals."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkRight)
+    msgbox(format("Over the last few hundred years they have been looted and sold."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkLeft)
+    msgbox(format("Now only this single specimen remains."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkRight)
+    msgbox(format("We didn't think much of it until 4 days ago when a meteor landed North on Mt Pyre."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkLeft)
+    msgbox(format("The meteor looked to be made of an incredibly similar material to these stones here."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkFromLeftToCenter)
+    msgbox(format("I believe this rock is from space!"))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkFromCenterToRight)
+    msgbox(format("Today, we're going to catalogue this specimen and identify the origins of these stones."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkOut)
+    waitmovement(COAL_ID)
+    msgbox(format("Come up and check it out for yourselves! {PLAYER}, you're up first!"))
+    setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 2)
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Coal {
+    lock
+    faceplayer
+    msgbox(format("Note the unique red color of the stone near the specimen."
+                  "It is quite different from the brown of the rest of the cave."
+                  "What could it mean?"))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Wally {
+    lock
+    faceplayer
+    msgbox(format("This is an amazing opportunity! Our first day and already something exciting is happening!"))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Sci1 {
+    lock
+    faceplayer
+    msgbox(format("Is this safe? Should you be wearing gloves?"))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Sci2 {
+    lock
+    faceplayer
+    msgbox(format("I don't remember hearing about a meteor landing..."))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Pikachu {
+    lock
+    faceplayer
+    msgbox(format("Pika pika!"))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Specimen {
+    lock
+    msgbox(format("It certainly looks like a weird rock. Could it really be from space?"))
+    release
+}
+
+script SuncloakDepths_B1F_Trigger_TutorialPushRight {
+    msgbox(Tutorial_GoCheckOutRock)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, TutorialPushRight)
+}
+
+script SuncloakDepths_B1F_Trigger_TutorialPushLeft {
+    msgbox(Tutorial_GoCheckOutRock)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, TutorialPushLeft)
+}
+
+text Tutorial_GoCheckOutRock {
+    "Come on! Go check out the rock."
+}
+
+movement TutorialPushRight {
+    walk_fast_right
+}
+
+movement TutorialPushLeft {
+    walk_fast_left
+}
+
+movement CoalSpeech_WalkLeft {
+    walk_slow_left * 4
+    face_down
+}
+
+movement CoalSpeech_WalkRight {
+    walk_slow_right * 4
+    face_down
+}
+
+movement CoalSpeech_WalkFromLeftToCenter {
+    walk_slow_right * 2
+    face_up
+    jump_in_place_up
+}
+
+movement CoalSpeech_WalkFromCenterToRight {
+    walk_slow_right * 2
+    face_down
+}
+
+movement CoalSpeech_WalkOut {
+    walk_left * 2
+    walk_down * 2
+    walk_left * 1
+    face_down
 }
