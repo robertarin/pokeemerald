@@ -397,6 +397,16 @@ extern const u8 gText_DefaultNameHalie[];
 extern const u8 gText_BirchInTrouble[];
 extern const u8 gText_ConfirmStarterChoice[];
 
+// Intro Coal speech
+extern const u8 gText_Coal_Welcome[];
+extern const u8 gText_Coal_UseFlash[];
+extern const u8 gText_Coal_Sorry[];
+extern const u8 gText_Coal_MainSpeech[];
+extern const u8 gText_Coal_Introduce[];
+extern const u8 gText_Coal_WelcomePlayerName[];
+extern const u8 gText_Coal_WhatStarter[];
+extern const u8 gText_Coal_LetsGetStarted[];
+
 // mystery event menu text
 extern const u8 gText_EventSafelyLoaded[];
 extern const u8 gText_LoadErrorEndingSession[];
