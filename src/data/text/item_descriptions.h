@@ -3912,3 +3912,10 @@ static const u8 sBerserkGene[] = _(
     "Sharply boosts\n"
     "Attack, but causes\n"
     "lasting confusion.");
+
+
+// New story key items
+static const u8 sSuncloakDepthsSample[] = _(
+    "A sample taken from\n"
+    "a bright blue stone\n"
+    "under Suncloak Town");

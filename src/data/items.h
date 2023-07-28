@@ -10350,4 +10350,18 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
     },
+
+    // New story / quest items
+
+    [ITEM_SUNCLOAK_DEPTHS_SAMPLE] =
+    {
+        .name = _("Stone Sample"),
+        .itemId = ITEM_SUNCLOAK_DEPTHS_SAMPLE,
+        .price = 0,
+        .description = sSuncloakDepthsSample,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
 };

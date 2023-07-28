@@ -1,10 +1,12 @@
 const COAL_ID = 1
+const FLAG_HAS_TOUCHED_STONE = FLAG_TEMP_1
 
 // State descriptions for VAR_SUNCLOAK_TUTORIAL_STATE
 // 1: First time in Suncloak Depths. Coal used Flash for you.
 // 2: Initial Coal speech is done.
-// 3: TBD
-// 4: TBD
+// 3: Player clicked on the rock. Rock is changed to small rock
+// 4: Player sent to Route 201
+// 5: Tutorial complete?
 
 mapscripts SuncloakDepths_B1F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION : SuncloakDepths_B1F_OnTransition
@@ -14,14 +16,21 @@ mapscripts SuncloakDepths_B1F_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_SUNCLOAK_TUTORIAL_STATE, 1: SuncloakDepths_B1F_OnFrame_IntroCoalSpeech
     ]
+    MAP_SCRIPT_ON_LOAD : SuncloakDepths_B1F_OnLoad
 }
 
 script SuncloakDepths_B1F_OnTransition {
-    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 1) {
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 5) {
         clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_COAL)
         clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS)
         clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY)
         setflashlevel(1)
+    }
+}
+
+script SuncloakDepths_B1F_OnLoad {
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) >= 3) {
+        setmetatile(22, 3, METATILE_Cave_ShoalCave_BlueStone_Small, TRUE)
     }
 }
 
@@ -42,7 +51,7 @@ script SuncloakDepths_B1F_OnFrame_IntroCoalSpeech {
     msgbox(format("Now only this single specimen remains."))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkRight)
-    msgbox(format("We didn't think much of it until 4 days ago when a meteor landed North on Mt Pyre."))
+    msgbox(format("We didn't think much of it until 4 days ago when a meteor landed up by Mt Mntn"))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkLeft)
     msgbox(format("The meteor looked to be made of an incredibly similar material to these stones here."))
@@ -63,16 +72,27 @@ script SuncloakDepths_B1F_OnFrame_IntroCoalSpeech {
 script SuncloakDepths_B1F_EventScript_Coal {
     lock
     faceplayer
-    msgbox(format("Note the unique red color of the stone near the specimen."
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 4) {
+        msgbox(format("Note the unique red color of the stone near the specimen."
                   "It is quite different from the brown of the rest of the cave."
                   "What could it mean?"))
+    }
+    else {
+        msgbox(format("Take that sample over to the lab on Route 201!"
+                      "Just leave Eastbound out of Suncloak Town."))
+    }
     release
 }
 
 script SuncloakDepths_B1F_EventScript_Wally {
     lock
     faceplayer
-    msgbox(format("This is an amazing opportunity! Our first day and already something exciting is happening!"))
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 4) {
+        msgbox(format("This is an amazing opportunity! Our first day and already something exciting is happening!"))
+    }
+    else {
+        msgbox(format("I guess I'll stay here and look at rocks with the professor."))
+    }
     release
 }
 
@@ -99,17 +119,55 @@ script SuncloakDepths_B1F_EventScript_Pikachu {
 
 script SuncloakDepths_B1F_EventScript_Specimen {
     lock
-    msgbox(format("It certainly looks like a weird rock. Could it really be from space?"))
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 2) {
+        if(!flag(FLAG_HAS_TOUCHED_STONE)) {
+            msgbox(format("You peer down at a cool blue stone."))
+            setflag(FLAG_HAS_TOUCHED_STONE)
+        }
+        msgbox("Take a sample?", MSGBOX_YESNO)
+        if(var(VAR_RESULT) == 1) {
+            playse(SE_CLICK)
+            setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 3)
+            setmetatile(22, 3, METATILE_Cave_ShoalCave_BlueStone_Small, TRUE)
+            special(DrawWholeMapView)
+            delay(10)
+            msgbox(format("You take a sample of the blue stone.\n"
+                          "The stone glimmers slightly less now."))
+            giveitem(ITEM_SUNCLOAK_DEPTHS_SAMPLE)
+        }
+    }
+    else {
+        msgbox(format("The last remaining blue stone from Suncloak Depths."
+                      "Now with a little less blue."))
+    }
+    release
+}
+
+script SuncloakDepths_B1F_Trigger_AfterPlayerTakesSample {
+    lock
+    applymovement(COAL_ID, CoalFaceRight)
+    msgbox(format("Well done!\p"
+                  "(Although you could have left some for your peers to try as well).\p"
+                  "Regardless, now that we have the sample we'll need to get it"
+                  "tested. We have a lab out on Route 201 East of town.\p"
+                  "{PLAYER}, since you have our entire sample now,"
+                  "would you please take that over to Dr. DoctorName"
+                  "at our lab? Let's see what they have to think.\p"
+                  "For the rest of you, we'll continue studying the"
+                  "geological oddities of this cave for the time being."))
+    setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 4)
     release
 }
 
 script SuncloakDepths_B1F_Trigger_TutorialPushRight {
+    applymovement(COAL_ID, JumpInPlaceDown)
     msgbox(Tutorial_GoCheckOutRock)
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, TutorialPushRight)
 }
 
 script SuncloakDepths_B1F_Trigger_TutorialPushLeft {
+    applymovement(COAL_ID, JumpInPlaceDown)
     msgbox(Tutorial_GoCheckOutRock)
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, TutorialPushLeft)
@@ -119,12 +177,25 @@ text Tutorial_GoCheckOutRock {
     "Come on! Go check out the rock."
 }
 
+movement JumpInPlaceDown {
+    jump_in_place_down
+}
+
+movement CoalFaceRight {
+    face_right
+    jump_in_place_right
+}
+
 movement TutorialPushRight {
     walk_fast_right
 }
 
 movement TutorialPushLeft {
     walk_fast_left
+}
+
+movement PlayerJumpInPlaceRockSmashed {
+    jump_in_place_up
 }
 
 movement CoalSpeech_WalkLeft {
