@@ -10351,6 +10351,21 @@ const struct Item gItems[] =
         .flingPower = 10,
     },
 
+    // New items
+
+    [ITEM_POKESTUS] =
+    {
+        .name = _("Pokestus"),
+        .itemId = ITEM_POKESTUS,
+        .price = 0,
+        .description = sPokestusDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Pokestus,
+    },
+
     // New story / quest items
 
     [ITEM_SUNCLOAK_DEPTHS_SAMPLE] =
@@ -10358,7 +10373,7 @@ const struct Item gItems[] =
         .name = _("Stone Sample"),
         .itemId = ITEM_SUNCLOAK_DEPTHS_SAMPLE,
         .price = 0,
-        .description = sSuncloakDepthsSample,
+        .description = sSuncloakDepthsSampleDesc,
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

@@ -1323,4 +1323,18 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
 }
 
+void ItemUseOutOfBattle_Pokestus(u8 taskId)
+{
+    // Clicking on an empty Pokestus will immediately show an error dialog
+    if(gSaveBlock1Ptr->pokestusCurrentCount == 0)
+    {
+        DisplayCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem, gText_Pokestus_Empty);
+    }
+    else 
+    {
+        gItemUseCB = ItemUseCB_Medicine;
+        SetUpItemUseCallback(taskId);
+    }
+}
+
 #undef tUsingRegisteredKeyItem

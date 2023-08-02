@@ -3913,9 +3913,13 @@ static const u8 sBerserkGene[] = _(
     "Attack, but causes\n"
     "lasting confusion.");
 
+static const u8 sPokestusDesc[] = _(
+    "Heals your\n"
+    "Pokemon. Has\n"
+    "limited charges.");
 
 // New story key items
-static const u8 sSuncloakDepthsSample[] = _(
+static const u8 sSuncloakDepthsSampleDesc[] = _(
     "A sample taken from\n"
     "a bright blue stone\n"
     "under Suncloak Town");

@@ -216,6 +216,7 @@ const u8 gText_SelectorArrow2[] = _("▶");
 const u8 gText_GoBackPrevMenu[] = _("Go back to the\nprevious menu.");
 const u8 gText_WhatWouldYouLike[] = _("What would you like to do?");
 const u8 gMenuText_Give2[] = _("GIVE");
+const u8 gText_plusVar1[] = _("+{STR_VAR_1}");
 const u8 gText_xVar1[] = _("×{STR_VAR_1}");
 const u8 gText_Berry2[] = _(" BERRY"); // Unused
 const u8 gText_Coins[] = _("{STR_VAR_1} COINS");
@@ -255,6 +256,8 @@ const u8 gText_TheBattle[] = _("the battle");
 const u8 gText_ThePokemonList[] = _("the POKéMON LIST");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
+const u8 gText_Pokestus_Empty[] = _("Your Pokestus is empty.{PAUSE_UNTIL_PRESS}");
+
 
 const u8 *const gBagMenu_ReturnToStrings[] =
 {

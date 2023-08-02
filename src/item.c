@@ -350,6 +350,17 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     u8 i;
     u16 totalQuantity = 0;
 
+    // We need to make sure we never remove the POKESTUS
+    // Most key items don't have to deal with this because they dont get "consumed" like medicine does
+    if(itemId == ITEM_POKESTUS)
+    {   
+        if (gSaveBlock1Ptr->pokestusCurrentCount > 0)
+        {
+            gSaveBlock1Ptr->pokestusCurrentCount = gSaveBlock1Ptr->pokestusCurrentCount - 1;
+        }
+        return TRUE;
+    }
+
     if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
         return FALSE;
 
@@ -1000,4 +1011,9 @@ u32 GetItemStatus2Mask(u16 itemId)
         return STATUS2_CONFUSION;
     else
         return 0;
+}
+
+void ResetPokestus(void)
+{
+    gSaveBlock1Ptr->pokestusCurrentCount = gSaveBlock1Ptr->pokestusMaxCount;
 }

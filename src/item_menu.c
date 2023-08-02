@@ -984,6 +984,25 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
             offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 119);
             BagMenu_Print(windowId, FONT_NARROW, gStringVar4, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
         }
+        // Pokestus is a special key item that has a quantity and can be registered.
+        else if (itemId == ITEM_POKESTUS)
+        {
+            // Print upgrade amount
+            ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pokestusUpgrade, STR_CONV_MODE_RIGHT_ALIGN, POKESTUS_UPGRADE_DIGITS);
+            StringExpandPlaceholders(gStringVar4, gText_plusVar1);
+            offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 65);
+            BagMenu_Print(windowId, FONT_NARROW, gStringVar4, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
+
+            // Print item quantity
+            ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pokestusCurrentCount, STR_CONV_MODE_RIGHT_ALIGN, POKESTUS_CAPACITY_DIGITS);
+            StringExpandPlaceholders(gStringVar4, gText_xVar1);
+            offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 95);
+            BagMenu_Print(windowId, FONT_NARROW, gStringVar4, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
+
+            // Print registered icon
+            if (gSaveBlock1Ptr->registeredItem != ITEM_NONE && gSaveBlock1Ptr->registeredItem == itemId)
+                BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
+        }
         else
         {
             // Print registered icon

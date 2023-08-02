@@ -974,10 +974,16 @@
 #define ITEM_PEAT_BLOCK 797
 #define ITEM_BERSERK_GENE 798
 
-// NEW STORY / QUEST ITEMS
-#define ITEM_SUNCLOAK_DEPTHS_SAMPLE 799
+// Pokestus related definitions
+#define ITEM_POKESTUS 799               // The actual item itself
+#define POKESTUS_NUM_UPGRADES 5         // Number of upgrades for pokestus
+#define POKESTUS_DEFAULT_UPGRADE 0      // Default to 0 upgrades
+#define POKESTUS_DEFAULT_COUNT 3        // Default to having 3 max
 
-#define ITEMS_COUNT 800
+// NEW STORY / QUEST ITEMS
+#define ITEM_SUNCLOAK_DEPTHS_SAMPLE 800
+
+#define ITEMS_COUNT 801
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
@@ -1013,6 +1019,8 @@
 #define MAX_PC_ITEM_CAPACITY   999
 #define MAX_BERRY_CAPACITY     999
 
+#define POKESTUS_UPGRADE_DIGITS 1
+#define POKESTUS_CAPACITY_DIGITS 2
 #define BAG_ITEM_CAPACITY_DIGITS 2
 #define BERRY_CAPACITY_DIGITS 3
 #define MAX_ITEM_DIGITS BERRY_CAPACITY_DIGITS

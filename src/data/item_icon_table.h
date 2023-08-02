@@ -845,6 +845,9 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_PEAT_BLOCK] = {gItemIcon_PeatBlock, gItemIconPalette_PeatBlock},
     [ITEM_BERSERK_GENE] = {gItemIcon_BerserkGene, gItemIconPalette_BerserkGene},
 
+    // New items
+    [ITEM_POKESTUS] = {gItemIcon_Potion, gItemIconPalette_Potion},
+
     // New story / quest items
     [ITEM_SUNCLOAK_DEPTHS_SAMPLE] = {gItemIcon_Gem, gItemIconPalette_Sapphire},
 

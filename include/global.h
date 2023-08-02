@@ -1071,6 +1071,11 @@ struct SaveBlock1
     /*0x3???*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3???*/ struct TrainerHillSave trainerHill;
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
+    // 84 bytes remaining according to https://www.pokecommunity.com/showpost.php?p=10168472
+    /*0x3???*/ u8 pokestusUpgrade;
+    /*0x3???*/ u8 pokestusMaxCount;
+    /*0x3???*/ u16 pokestusCurrentCount;
+    // 80 bytes remaining now?
     // sizeof: 0x3???
 };
 

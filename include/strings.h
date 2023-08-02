@@ -432,6 +432,7 @@ extern const u8 gText_FirmSlash[];
 extern const u8 gText_CloseBag[];
 extern const u8 gText_NumberItem_HM[];
 extern const u8 gText_NumberItem_TMBerry[];
+extern const u8 gText_plusVar1[];
 extern const u8 gText_xVar1[];
 extern const u8 gText_ReturnToVar1[];
 extern const u8 gText_SelectorArrow2[];
@@ -3044,5 +3045,7 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
+
+extern const u8 gText_Pokestus_Empty[];
 
 #endif // GUARD_STRINGS_H

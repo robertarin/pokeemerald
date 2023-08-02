@@ -402,6 +402,7 @@ extern const struct BattleMove gBattleMoves[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
+extern const u8 *const gPokestusEffectTable[POKESTUS_NUM_UPGRADES];
 extern const u8 *const gItemEffectTable[ITEMS_COUNT];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const struct LevelUpMove *const gLevelUpLearnsets[];

@@ -5677,7 +5677,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
     // Skip using the item if it won't do anything
-    if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY_E_READER)
+    // POKESTUS has it's own effect table so we check for that as well
+    if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY_E_READER && item != ITEM_POKESTUS)
         return TRUE;
 
     // Get item effect

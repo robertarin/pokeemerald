@@ -5796,6 +5796,8 @@ const u8* GetItemEffect(u16 item)
 {
     if (item == ITEM_ENIGMA_BERRY_E_READER)
         return gSaveBlock1Ptr->enigmaBerry.itemEffect;
+    else if (item == ITEM_POKESTUS)
+        return gPokestusEffectTable[gSaveBlock1Ptr->pokestusUpgrade];
     else
         return gItemEffectTable[item];
 }

@@ -447,6 +447,15 @@ const u8 gItemEffect_TamatoBerry[10] = {
     EV_BERRY_FRIENDSHIP_CHANGE,
 };
 
+const u8 *const gPokestusEffectTable[POKESTUS_NUM_UPGRADES] =
+{
+    gItemEffect_Potion,
+    gItemEffect_SuperPotion,
+    gItemEffect_HyperPotion,
+    gItemEffect_MaxPotion,
+    gItemEffect_FullRestore,
+};
+
 const u8 *const gItemEffectTable[ITEMS_COUNT] =
 {
     // Medicine
