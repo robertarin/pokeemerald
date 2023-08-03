@@ -1,0 +1,9 @@
+mapscripts SuncloakTown_MapScripts {}
+
+script SuncloakTown_EventScript_Camper {
+    lock
+    faceplayer
+    msgbox(format("Restored pokestus."))
+    special(PokestusRefill)
+    release
+}

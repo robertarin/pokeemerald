@@ -978,12 +978,14 @@
 #define ITEM_POKESTUS 799               // The actual item itself
 #define POKESTUS_NUM_UPGRADES 5         // Number of upgrades for pokestus
 #define POKESTUS_DEFAULT_UPGRADE 0      // Default to 0 upgrades
-#define POKESTUS_DEFAULT_COUNT 3        // Default to having 3 max
+#define POKESTUS_DEFAULT_COUNT 1        // Default to having 1 max
+
+#define ITEM_METEOR_SHARD 800           // Item to upgrade count of Pokestus
 
 // NEW STORY / QUEST ITEMS
-#define ITEM_SUNCLOAK_DEPTHS_SAMPLE 800
+#define ITEM_SUNCLOAK_DEPTHS_SAMPLE 801
 
-#define ITEMS_COUNT 801
+#define ITEMS_COUNT 802
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

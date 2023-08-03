@@ -1013,7 +1013,13 @@ u32 GetItemStatus2Mask(u16 itemId)
         return 0;
 }
 
-void ResetPokestus(void)
+void PokestusRefill(void)
 {
     gSaveBlock1Ptr->pokestusCurrentCount = gSaveBlock1Ptr->pokestusMaxCount;
+}
+
+void PokestusUpgradeCount(void)
+{
+    gSaveBlock1Ptr->pokestusMaxCount = gSaveBlock1Ptr->pokestusMaxCount + 1;
+    PokestusRefill();
 }

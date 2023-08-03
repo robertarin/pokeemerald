@@ -1,0 +1,82 @@
+const ASSISTANT_ID = 1
+
+mapscripts SuncloakTown_Lab_MapScripts {}
+
+// This map also uses VAR_SUNCLOAK_TUTORIAL_STATE for Pokestus tutorials
+// See SuncloakDepths_B1F/scripts.pory for info on the states there
+
+script SuncloakTown_Lab_EventScript_Assistant {
+    lock
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 6) {
+        msgbox(format("Maybe if I update the synthesis event here ..."))
+        applymovement(ASSISTANT_ID, AssistantExclamation)
+        faceplayer
+        msgbox(format("Ah! You must be our newest member, {PLAYER}. Professor Coal told me to outfit you."
+                      "First, here are some Pokeballs to keep you safe while you're out there."))
+        giveitem(ITEM_POKE_BALL, 10)
+        msgbox(format("As for supplies, we have just finished creating model zero of what we are calling the 'Pokestus'."))            
+        giveitem(ITEM_POKESTUS, 1)
+        msgbox(format("Using materials harvested from the recently downed meteors we have been able to synthesize "
+                      "an infinitely rechargable Pokemon healing device!\p"
+                      "Sadly, the materials are incredibly hard to come by as the meteors primarily fell only "
+                      "in the most remote locations."
+                      "This one is brand new, and you will need to activate it "
+                      "at the synthesizer in the corner of the lab."
+                      "Go give it a try!"))    
+        setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 6)
+    }
+    elif(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 6) {
+        faceplayer
+        msgbox(format("Go give the synthesizer a try!"))
+    }
+    else {
+        faceplayer
+        msgbox(format("Good luck out in the world!"))
+    }
+    release
+}
+
+script SuncloakTown_Lab_EventScript_Pokestus_Synthesizer {
+    lock
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 6) {
+        msgbox(format("This looks complicated.\nMaybe I shouldn't touch it."))
+    }
+    elif(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 6) {
+        msgbox(format("The Pokestus synthesizer whirrs to life."))
+        msgbox("Press the blinking 'ENGAGE' button?", MSGBOX_YESNO)
+        if(var(VAR_RESULT) == 1) {
+            playse(SE_CLICK)
+            special(PokestusRefill)
+            setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 7)
+            msgbox(format("Your Pokestus has been activated!\nIt now has 1 charge."))
+        }
+    }
+    else {
+        msgbox(format("The Pokestus synthesizer whirrs to life."))
+        checkitem(ITEM_METEOR_SHARD)
+        if(var(VAR_RESULT) == 1) {
+            msgbox("Do you wish to enhance your Pokestus\nwith a Meteor Shard?", MSGBOX_YESNO)
+            if(var(VAR_RESULT) == 1) {
+                playse(SE_CLICK)
+                special(PokestusUpgradeCount)
+                msgbox(format("Your Pokestus has been enhanced."))
+            }
+        }
+        else {
+            playse(SE_CLICK)
+            special(PokestusRefill)
+            msgbox(format("Your Pokestus has been re-charged."))
+        }
+    }
+    
+    release
+}
+
+movement AssistantExclamation {
+    emote_exclamation_mark
+}
+
+movement AssistantToSynthesizer {
+    walk_fast_right * 10
+    face_down
+}

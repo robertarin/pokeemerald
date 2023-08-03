@@ -10366,6 +10366,18 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_Pokestus,
     },
 
+    [ITEM_METEOR_SHARD] =
+    {
+        .name = _("Meteor Shard"),
+        .itemId = ITEM_METEOR_SHARD,
+        .price = 0,
+        .description = sPokestusDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+
     // New story / quest items
 
     [ITEM_SUNCLOAK_DEPTHS_SAMPLE] =

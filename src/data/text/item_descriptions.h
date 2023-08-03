@@ -3918,6 +3918,11 @@ static const u8 sPokestusDesc[] = _(
     "Pokemon. Has\n"
     "limited charges.");
 
+static const u8 sMeteorShardDesc[] = _(
+    "Shard of unknown\n"
+    "material. Used\n"
+    "to upgrade PKSTS.");
+
 // New story key items
 static const u8 sSuncloakDepthsSampleDesc[] = _(
     "A sample taken from\n"

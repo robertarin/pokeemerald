@@ -76,6 +76,7 @@ u8 ItemId_GetFlingPower(u16 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
 
-void ResetPokestus();
+void PokestusRefill(void);
+void PokestusUpgradeCount(void);
 
 #endif // GUARD_ITEM_H

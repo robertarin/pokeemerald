@@ -537,4 +537,5 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SetTotemBoost
 	def_special TrySpecialOverworldEvo
-	def_special ResetPokestus
+	def_special PokestusRefill
+	def_special PokestusUpgradeCount

@@ -847,6 +847,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 
     // New items
     [ITEM_POKESTUS] = {gItemIcon_Potion, gItemIconPalette_Potion},
+    [ITEM_METEOR_SHARD] = {gItemIcon_Meteorite, gItemIconPalette_Meteorite},
 
     // New story / quest items
     [ITEM_SUNCLOAK_DEPTHS_SAMPLE] = {gItemIcon_Gem, gItemIconPalette_Sapphire},
