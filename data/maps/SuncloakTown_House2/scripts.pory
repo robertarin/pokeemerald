@@ -1,0 +1,8 @@
+mapscripts SuncloakTown_House2_MapScripts {}
+
+script SuncloakTown_House2_EventScript_OldWoman {
+    lock
+    faceplayer
+    msgbox(format("I havn't seen you around here before! Did you move in recently?"))
+    release
+}

@@ -1080,3 +1080,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/SuncloakTown_Lab/scripts.inc"
 
 	.include "data/maps/SuncloakDepths_B1F/scripts.inc"
+
+	.include "data/maps/SuncloakTown_PlayerHouse_B1F/scripts.inc"

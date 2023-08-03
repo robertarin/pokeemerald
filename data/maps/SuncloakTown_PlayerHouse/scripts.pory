@@ -1,0 +1,20 @@
+mapscripts SuncloakTown_PlayerHouse_MapScripts {}
+
+script SuncloakTown_PlayerHouse_EventScript_OldMan {
+    lock
+    faceplayer
+    if(flag(FLAG_SUNCLOAK_TOWN_PLAYER_HOUSE_UNVISITED)) {
+        msgbox(format("Hey {PLAYER}, your newfangled PC was just delivered to your room downstairs!"))
+        clearflag(FLAG_SUNCLOAK_TOWN_PLAYER_HOUSE_UNVISITED)
+    }
+    msgbox(format("Don't you forget that rent is due at the end of the week!"))
+    release
+}
+
+script SuncloakTown_PlayerHouse_EventScript_Pooch {
+    lock
+    faceplayer
+    playmoncry(SPECIES_POOCHYENA, CRY_MODE_NORMAL)
+    msgbox(format("Woof!"))
+    release
+}

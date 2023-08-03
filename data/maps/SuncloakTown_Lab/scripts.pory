@@ -11,7 +11,7 @@ script SuncloakTown_Lab_EventScript_Assistant {
         msgbox(format("Maybe if I update the synthesis event here ..."))
         applymovement(ASSISTANT_ID, AssistantExclamation)
         faceplayer
-        msgbox(format("Ah! You must be our newest member, {PLAYER}. Professor Coal told me to outfit you."
+        msgbox(format("Ah! You must be our newest member, {PLAYER}. Professor Coal told me to outfit you. "
                       "First, here are some Pokeballs to keep you safe while you're out there."))
         giveitem(ITEM_POKE_BALL, 10)
         msgbox(format("As for supplies, we have just finished creating model zero of what we are calling the 'Pokestus'."))            
@@ -31,7 +31,7 @@ script SuncloakTown_Lab_EventScript_Assistant {
     }
     else {
         faceplayer
-        msgbox(format("Good luck out in the world!"))
+        msgbox(format("If we had more meteor shards we could upgrade the Pokestus!"))
     }
     release
 }

@@ -1,0 +1,7 @@
+mapscripts SuncloakTown_PlayerHouse2_MapScripts {}
+
+script SuncloakTown_PlayerHouse2_Bed {
+    lock
+    msgbox(format("I should probably sleep in my own bed downstairs..."))
+    release
+}

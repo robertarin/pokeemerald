@@ -123,6 +123,7 @@ SuncloakDepths_B1F_EventScript_Sci2::
 SuncloakDepths_B1F_EventScript_Pikachu::
 	lock
 	faceplayer
+	playmoncry SPECIES_PIKACHU, CRY_MODE_NORMAL
 	msgbox SuncloakDepths_B1F_EventScript_Pikachu_Text_0
 	release
 	return

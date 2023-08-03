@@ -80,6 +80,20 @@ SuncloakTown_Lab_EventScript_Pokestus_Synthesizer_12:
 	goto SuncloakTown_Lab_EventScript_Pokestus_Synthesizer_1
 
 
+SuncloakTown_Lab_EventScript_Bookshelf::
+	lock
+	msgbox SuncloakTown_Lab_EventScript_Bookshelf_Text_0
+	release
+	return
+
+
+SuncloakTown_Lab_EventScript_Notes::
+	lock
+	msgbox SuncloakTown_Lab_EventScript_Notes_Text_0
+	release
+	return
+
+
 AssistantExclamation:
 	emote_exclamation_mark
 	step_end
@@ -130,7 +144,8 @@ SuncloakTown_Lab_EventScript_Assistant_Text_4:
 	.string "Go give the synthesizer a try!$"
 
 SuncloakTown_Lab_EventScript_Assistant_Text_5:
-	.string "Good luck out in the world!$"
+	.string "If we had more meteor shards we could\n"
+	.string "upgrade the Pokestus!$"
 
 SuncloakTown_Lab_EventScript_Pokestus_Synthesizer_Text_0:
 	.string "This looks complicated.\n"
@@ -155,3 +170,11 @@ SuncloakTown_Lab_EventScript_Pokestus_Synthesizer_Text_5:
 
 SuncloakTown_Lab_EventScript_Pokestus_Synthesizer_Text_6:
 	.string "Your Pokestus has been re-charged.$"
+
+SuncloakTown_Lab_EventScript_Bookshelf_Text_0:
+	.string "The shelves are filled with exciting new\n"
+	.string "research!$"
+
+SuncloakTown_Lab_EventScript_Notes_Text_0:
+	.string "I shouldn't mess with any of the\n"
+	.string "Professors notes.$"

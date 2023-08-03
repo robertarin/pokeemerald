@@ -282,11 +282,13 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_COAL
 	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS
 	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY
+	setflag FLAG_SUNCLOAK_TOWN_PLAYER_HOUSE_UNVISITED
 	end
 
 EventScript_SuncloakStart::
 	@ FLAG_ADVENTURE_STARTED lets us go past OldaleTown and buy pokeballs from OldaleTown_Mart.
 	setflag FLAG_ADVENTURE_STARTED
+	setrespawn HEAL_LOCATION_SUNCLOAK_TOWN
 
 	@ Enable running shoes.
 	setflag FLAG_RECEIVED_RUNNING_SHOES

@@ -11,7 +11,7 @@ script SuncloakTown_EventScript_Camper {
 script SuncloakTown_EventScript_Woman {
     lock
     faceplayer
-    msgbox(format("We have such great views here in Suncloak Town!"))
+    msgbox(format("I'm speculating that the value of my waterfront property will rise dramatically in the next 10 years!"))
     release
 }
 
@@ -22,7 +22,7 @@ script SuncloakTown_EventScript_DepthsSign {
     release
 }
 
-script SuncloakTown_EventScript_DepthsSign {
+script SuncloakTown_EventScript_TownSign {
     lock
     msgbox(format("Suncloak Town - \p"
                   "Route 201 {RIGHT_ARROW}"))

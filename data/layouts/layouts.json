@@ -4444,7 +4444,7 @@
     {
       "id": "LAYOUT_SUNCLOAK_TOWN_PLAYER_HOUSE",
       "name": "SuncloakTown_PlayerHouse_Layout",
-      "width": 11,
+      "width": 13,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BrendansMaysHouse",
@@ -4510,6 +4510,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/SuncloakDepths_B1F/border.bin",
       "blockdata_filepath": "data/layouts/SuncloakDepths_B1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_SUNCLOAK_TOWN_PLAYER_HOUSE_B1F",
+      "name": "SuncloakTown_PlayerHouse_B1F_Layout",
+      "width": 13,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "border_filepath": "data/layouts/SuncloakTown_PlayerHouse_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/SuncloakTown_PlayerHouse_B1F/map.bin"
     }
   ]
 }

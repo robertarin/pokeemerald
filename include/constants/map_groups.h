@@ -599,11 +599,12 @@
 #define MAP_ROUTE201_HOUSE1 (0 | (34 << 8))
 
 // gMapGroup_IndoorSuncloak
-#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE  (0 | (35 << 8))
-#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE2 (1 | (35 << 8))
-#define MAP_SUNCLOAK_TOWN_HOUSE1        (2 | (35 << 8))
-#define MAP_SUNCLOAK_TOWN_HOUSE2        (3 | (35 << 8))
-#define MAP_SUNCLOAK_TOWN_LAB           (4 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE     (0 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE2    (1 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE_B1F (2 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_HOUSE1           (3 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_HOUSE2           (4 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_LAB              (5 | (35 << 8))
 
 #define MAP_GROUPS_COUNT 36
 
