@@ -72,6 +72,18 @@ script SuncloakTown_Lab_EventScript_Pokestus_Synthesizer {
     release
 }
 
+script SuncloakTown_Lab_EventScript_Bookshelf {
+    lock
+    msgbox(format("The shelves are filled with exciting new research!"))
+    release
+}
+
+script SuncloakTown_Lab_EventScript_Notes {
+    lock
+    msgbox(format("I shouldn't mess with any of the Professors notes."))
+    release
+}
+
 movement AssistantExclamation {
     emote_exclamation_mark
 }

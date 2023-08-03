@@ -3,7 +3,34 @@ mapscripts SuncloakTown_MapScripts {}
 script SuncloakTown_EventScript_Camper {
     lock
     faceplayer
-    msgbox(format("Restored pokestus."))
-    special(PokestusRefill)
+    msgbox(format("Be careful out at Route 201!\p"
+                  "If you're heading out there you should catch as many Pokemon as you can carry!"))
+    release
+}
+
+script SuncloakTown_EventScript_Woman {
+    lock
+    faceplayer
+    msgbox(format("We have such great views here in Suncloak Town!"))
+    release
+}
+
+script SuncloakTown_EventScript_DepthsSign {
+    lock
+    msgbox(format("Suncloak Depths - \p"
+                  "Admittance to HRI members only."))
+    release
+}
+
+script SuncloakTown_EventScript_DepthsSign {
+    lock
+    msgbox(format("Suncloak Town - \p"
+                  "Route 201 {RIGHT_ARROW}"))
+    release
+}
+
+script SuncloakTown_EventScript_LabSign {
+    lock
+    msgbox(format("Hoenn Research Institute Lab"))
     release
 }
