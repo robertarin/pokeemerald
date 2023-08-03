@@ -342,7 +342,7 @@ static void HandleInputChooseAction(void)
         PlayerBufferExecCompleted();
     }
 #endif
-    else if (JOY_NEW(R_BUTTON))
+    else if (JOY_NEW(B_TYPE_DISPLAY_BUTTON))
     {
         gTypeIconSpritesVisible = !gTypeIconSpritesVisible;
     }
