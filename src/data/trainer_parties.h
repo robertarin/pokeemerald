@@ -12438,7 +12438,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayLinkPlaceholder[] = {
 static const struct TrainerMonNoItemDefaultMoves sParty_Sean[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 4,
     .species = SPECIES_ODDISH,
     }
 };
@@ -12446,7 +12446,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sean[] = {
 static const struct TrainerMonNoItemDefaultMoves sParty_Jon[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 3,
     .species = SPECIES_SHINX,
     }
 };
