@@ -47,6 +47,14 @@ Route201_Text_InfoSign:
 	.string "on this route without leaving\p"
 	.string "to fully clear it!$"
 
+Route201_EventScript_DirectionSignNorth::
+	msgbox Route201_Text_DirectionSignNorth, MSGBOX_SIGN
+	end
+
+Route201_Text_DirectionSignNorth:
+	.string "Suncloak Town {UP_ARROW}\n"
+	.string "Cave {DOWN_ARROW}$"
+
 Route201_EventScript_HouseSign::
 	msgbox Route201_Text_InfoSign, MSGBOX_SIGN
 	end

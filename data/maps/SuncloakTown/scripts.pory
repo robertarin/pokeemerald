@@ -11,7 +11,7 @@ script SuncloakTown_EventScript_Camper {
 script SuncloakTown_EventScript_Woman {
     lock
     faceplayer
-    msgbox(format("I'm speculating that the value of my waterfront property will rise dramatically in the next 10 years!"))
+    msgbox(format("Suncloak is currently a backwater town, but I'm speculating that the value of my waterfront property will rise dramatically in the next 10 years!"))
     release
 }
 

@@ -32,9 +32,8 @@ SuncloakTown_PlayerHouse_EventScript_OldMan_Text_0:
 	.string "downstairs!$"
 
 SuncloakTown_PlayerHouse_EventScript_OldMan_Text_1:
-	.string "How did your meeting go with that fancy\n"
-	.string "professor? Don't you forget that rent\l"
-	.string "is due at the end of the week!$"
+	.string "Don't you forget that rent is due at\n"
+	.string "the end of the week!$"
 
 SuncloakTown_PlayerHouse_EventScript_Pooch_Text_0:
 	.string "Woof!$"
