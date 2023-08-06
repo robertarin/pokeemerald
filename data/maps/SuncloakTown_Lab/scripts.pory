@@ -21,7 +21,7 @@ script SuncloakTown_Lab_EventScript_Assistant {
                       "Sadly, the materials are incredibly hard to come by as the meteors primarily fell only "
                       "in the most remote locations."
                       "This one is brand new, and you will need to activate it "
-                      "at the synthesizer in the corner of the lab."
+                      "at the synthesizer on the right side of the lab."
                       "Go give it a try!"))    
         setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 6)
     }

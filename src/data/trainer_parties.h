@@ -12450,3 +12450,16 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Jon[] = {
     .species = SPECIES_SHINX,
     }
 };
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Camper_Jim[] = {
+    {
+    .iv = 0,
+    .lvl = 4,
+    .species = SPECIES_GEODUDE,
+    },
+    {
+    .iv = 0,
+    .lvl = 5,
+    .species = SPECIES_SANDSHREW,
+    }
+};

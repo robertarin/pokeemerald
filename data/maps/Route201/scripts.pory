@@ -1,3 +1,4 @@
+raw `
 Route201_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route201_OnTransition
 	.byte 0
@@ -87,45 +88,35 @@ Route201_Text_JonDefeated:
 
 Route201_Text_JonPostBattle:
 	.string "I didn't even agree to be here!$"
+`
 
-Route201_EventScript_Camper::
-	trainerbattle_single TRAINER_JON, Route201_Text_CamperIntro, Route201_Text_CamperDefeated, Route201_Event_Script_CheckTrainersCompletion
-	msgbox Route201_Text_CamperPostBattle, MSGBOX_AUTOCLOSE
-	return
+text Route201_Text_CamperIntro {
+	format("Battling outside is thrilling!")
+}
 
+text Route201_Text_CamperDefeated {
+	format("I guess I'm a better camper than battler...")
+}
 
-Route201_EventScript_Lass::
+text Route201_Text_CamperPostBattle {
+	format("Hopefully I at least made you use a Pokestus charge!")
+}
+
+script Route201_EventScript_Camper {
+	trainerbattle_single(TRAINER_JON, Route201_Text_CamperIntro, Route201_Text_CamperDefeated, Route201_Event_Script_CheckTrainersCompletion)
+	msgbox(Route201_Text_CamperPostBattle, MSGBOX_AUTOCLOSE)
+}
+
+script Route201_EventScript_Lass {
 	lock
 	faceplayer
-	msgbox Route201_EventScript_Lass_Text_0
+	msgbox(format("I made it through the cave but I'm completely out of healing items! I should have been more careful..."))
 	release
-	return
+}
 
-
-Route201_EventScript_Boy_1::
-	lock
+script Route201_EventScript_Boy_1 {
+	lock 
 	faceplayer
-	msgbox Route201_EventScript_Boy_1_Text_0
+	msgbox(format("Hey! Do you know how to cross these? I havn't been able to figure it out."))
 	release
-	return
-
-
-Route201_EventScript_Lass_Text_0:
-	.string "I made it through the cave but I'm\n"
-	.string "completely out of healing items! I\l"
-	.string "should have been more careful...$"
-
-Route201_EventScript_Boy_1_Text_0:
-	.string "Hey! Do you know how to cross these? I\n"
-	.string "havn't been able to figure it out.$"
-
-Route201_Text_CamperIntro::
-	.string "Battling outside is thrilling!$"
-
-Route201_Text_CamperDefeated::
-	.string "I guess I'm a better camper than\n"
-	.string "battler...$"
-
-Route201_Text_CamperPostBattle::
-	.string "Hopefully I at least made you use a\n"
-	.string "Pokestus charge!$"
+}

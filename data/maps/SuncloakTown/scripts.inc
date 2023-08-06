@@ -46,8 +46,9 @@ SuncloakTown_EventScript_Camper_Text_0:
 	.string "carry!$"
 
 SuncloakTown_EventScript_Woman_Text_0:
-	.string "I'm speculating that the value of my\n"
-	.string "waterfront property will rise\l"
+	.string "Suncloak is currently a backwater town,\n"
+	.string "but I'm speculating that the value of\l"
+	.string "my waterfront property will rise\l"
 	.string "dramatically in the next 10 years!$"
 
 SuncloakTown_EventScript_DepthsSign_Text_0:

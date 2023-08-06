@@ -137,8 +137,9 @@ SuncloakTown_Lab_EventScript_Assistant_Text_3:
 	.string "to come by as the meteors primarily\l"
 	.string "fell only in the most remote locations.\l"
 	.string "This one is brand new, and you will need\l"
-	.string "to activate it at the synthesizer in\l"
-	.string "the corner of the lab. Go give it a try!$"
+	.string "to activate it at the synthesizer on\l"
+	.string "the right side of the lab. Go give it a\l"
+	.string "try!$"
 
 SuncloakTown_Lab_EventScript_Assistant_Text_4:
 	.string "Go give the synthesizer a try!$"
