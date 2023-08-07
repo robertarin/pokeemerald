@@ -701,6 +701,7 @@ static const struct LevelUpMove sClefableLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sVulpixLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(1, MOVE_EMBER),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE(4, MOVE_ROAR),
@@ -3762,7 +3763,7 @@ static const struct LevelUpMove sMareepLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(1, MOVE_GROWL),
     LEVEL_UP_MOVE(4, MOVE_THUNDER_WAVE),
-    LEVEL_UP_MOVE(7, MOVE_THUNDER_SHOCK),
+    LEVEL_UP_MOVE(5, MOVE_THUNDER_SHOCK),
     LEVEL_UP_MOVE(10, MOVE_COTTON_SPORE),
     LEVEL_UP_MOVE(13, MOVE_CHARGE),
     LEVEL_UP_MOVE(16, MOVE_CHARGE_BEAM),
@@ -4933,7 +4934,6 @@ static const struct LevelUpMove sKingdraLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sPhanpyLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_ODOR_SLEUTH),
     LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(1, MOVE_GROWL),
     LEVEL_UP_MOVE(1, MOVE_DEFENSE_CURL),
