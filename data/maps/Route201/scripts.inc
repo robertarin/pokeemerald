@@ -19,6 +19,7 @@ Route201_EventScript_Jon::
 Route201_Event_Script_CheckTrainersCompletion::
 	goto_if_not_defeated TRAINER_SEAN, Route201_EventScript_TrainersNotCompleted
 	goto_if_not_defeated TRAINER_JON, Route201_EventScript_TrainersNotCompleted
+	goto_if_not_defeated TRAINER_CAMPER_JIM, Route201_EventScript_TrainersNotCompleted
 	setflag FLAG_TRAINERS_DEFEATED_ROUTE_201
 	release
 	end
@@ -30,6 +31,7 @@ Route201_EventScript_TrainersNotCompleted::
 Route201_EventScript_ResetAllTrainers::
 	cleartrainerflag TRAINER_JON
 	cleartrainerflag TRAINER_SEAN
+	cleartrainerflag TRAINER_CAMPER_JIM
 	end
 
 Route201_EventScript_InfoSign::
@@ -89,7 +91,7 @@ Route201_Text_JonPostBattle:
 	.string "I didn't even agree to be here!$"
 
 Route201_EventScript_Camper::
-	trainerbattle_single TRAINER_JON, Route201_Text_CamperIntro, Route201_Text_CamperDefeated, Route201_Event_Script_CheckTrainersCompletion
+	trainerbattle_single TRAINER_CAMPER_JIM, Route201_Text_CamperIntro, Route201_Text_CamperDefeated, Route201_Event_Script_CheckTrainersCompletion
 	msgbox Route201_Text_CamperPostBattle, MSGBOX_AUTOCLOSE
 	return
 
@@ -97,7 +99,8 @@ Route201_EventScript_Camper::
 Route201_EventScript_Lass::
 	lock
 	faceplayer
-	msgbox Route201_EventScript_Lass_Text_0
+	trainerbattle_single TRAINER_SAD_LASS, Route201_Text_LassIntro, Route201_Text_LassDefeated
+	msgbox Route201_Text_LassPostBattle, MSGBOX_AUTOCLOSE
 	release
 	return
 
@@ -109,11 +112,6 @@ Route201_EventScript_Boy_1::
 	release
 	return
 
-
-Route201_EventScript_Lass_Text_0:
-	.string "I made it through the cave but I'm\n"
-	.string "completely out of healing items! I\l"
-	.string "should have been more careful...$"
 
 Route201_EventScript_Boy_1_Text_0:
 	.string "Hey! Do you know how to cross these? I\n"
@@ -129,3 +127,17 @@ Route201_Text_CamperDefeated::
 Route201_Text_CamperPostBattle::
 	.string "Hopefully I at least made you use a\n"
 	.string "Pokestus charge!$"
+
+Route201_Text_LassIntro::
+	.string "I made it through the cave but I'm\n"
+	.string "completely out of healing items!\p"
+	.string "I'm not sure I'll make it to Suncloak\n"
+	.string "Town...\p"
+	.string "Unless...$"
+
+Route201_Text_LassDefeated::
+	.string "I'm sorry! I was just afraid!$"
+
+Route201_Text_LassPostBattle::
+	.string "I can't even heal my pokemon when you\n"
+	.string "leave...$"

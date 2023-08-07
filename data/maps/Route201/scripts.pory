@@ -109,10 +109,23 @@ script Route201_EventScript_Camper {
 	msgbox(Route201_Text_CamperPostBattle, MSGBOX_AUTOCLOSE)
 }
 
+text Route201_Text_LassIntro {
+	format("I made it through the cave but I'm completely out of healing items!\pI'm not sure I'll make it to Suncloak Town...\pUnless...")
+}
+
+text Route201_Text_LassDefeated {
+	format("I'm sorry! I was just afraid!")
+}
+
+text Route201_Text_LassPostBattle {
+	format("I can't even heal my pokemon when you leave...")
+}
+
 script Route201_EventScript_Lass {
 	lock
 	faceplayer
-	msgbox(format("I made it through the cave but I'm completely out of healing items! I should have been more careful..."))
+	trainerbattle_single(TRAINER_SAD_LASS, Route201_Text_LassIntro, Route201_Text_LassDefeated)
+	msgbox(Route201_Text_LassPostBattle, MSGBOX_AUTOCLOSE)
 	release
 }
 

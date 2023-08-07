@@ -12463,3 +12463,11 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Camper_Jim[] = {
     .species = SPECIES_SANDSHREW,
     }
 };
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Sad_Lass[] = {
+    {
+    .iv = 0,
+    .lvl = 7,
+    .species = SPECIES_BUIZEL,
+    }
+};

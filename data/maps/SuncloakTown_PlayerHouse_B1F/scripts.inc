@@ -12,6 +12,7 @@ SuncloakTown_PlayerHouse_B1F_EventScript_Bed_1:
 	return
 
 SuncloakTown_PlayerHouse_B1F_EventScript_Bed_2:
+	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
 	goto SuncloakTown_PlayerHouse_B1F_EventScript_Bed_1
