@@ -9,7 +9,8 @@ const FLAG_HAS_TOUCHED_STONE = FLAG_TEMP_1
 // 5: Player told about supplies
 // 6: Player received Pokestus / Pokeballs
 // 7: Pokestus activated.
-// 8: Something done on Route 201. All Tutorial states now complete
+// 8: Assistant tells of dangers. Player ready for adventure! Coal still in Depths
+// 9: Something done on Route 201. All Tutorial states now complete. Coal back in lab
 
 mapscripts SuncloakDepths_B1F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION : SuncloakDepths_B1F_OnTransition
@@ -23,7 +24,7 @@ mapscripts SuncloakDepths_B1F_MapScripts {
 }
 
 script SuncloakDepths_B1F_OnTransition {
-    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 8) {
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 9) {
         clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_COAL)
         clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS)
         clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY)
@@ -45,29 +46,29 @@ script SuncloakDepths_B1F_OnFrame_IntroCoalSpeech {
     lock
     applymovement(COAL_ID, CoalSpeech_WalkLeft)
     msgbox(format("When Suncloak town was founded the residents"
-                    "discovered that the caves beneath had hundreds of fantastic crystals.\p"))
+                    "discovered that the caves beneath had hundreds of fantastic crystals."))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkRight)
-    msgbox(format("Over the last few hundred years they have been looted and sold.\p"))
+    msgbox(format("Over the last few hundred years they have been looted and sold."))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkLeft)
-    msgbox(format("Now only this single specimen remains.\p"))
+    msgbox(format("Now only this single specimen remains."))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkRight)
-    msgbox(format("We didn't think much of it until 4 days ago when a meteor landed up by Mt Mntn.\p"))
+    msgbox(format("We didn't think much of it until 4 days ago when a meteor landed up by Mt Grey."))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkLeft)
-    msgbox(format("The meteor looked to be made of an incredibly similar material to these stones here.\p"))
+    msgbox(format("The meteor looked to be made of an incredibly similar material to these stones here."))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkFromLeftToCenter)
     msgbox(format("I believe this rock is from space!"))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkFromCenterToRight)
-    msgbox(format("Today, we're going to catalogue this specimen and identify the origins of these stones.\p"))
+    msgbox(format("Today, we're going to catalogue this specimen and identify the origins of these stones."))
     waitmovement(COAL_ID)
     applymovement(COAL_ID, CoalSpeech_WalkOut)
     waitmovement(COAL_ID)
-    msgbox(format("Come up and check it out for yourselves! {PLAYER}, you're up first!\p"))
+    msgbox(format("Come up and check it out for yourselves! {PLAYER}, you're up first!"))
     setobjectxyperm(COAL_ID, 21, 6)     //Make Coal stay in this spot even if the player explores a bit
     setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 2)
     release
@@ -82,7 +83,7 @@ script SuncloakDepths_B1F_EventScript_Coal {
                   "What could it mean?"))
     }
     else {
-        msgbox(format("Take that sample over to the lab on Route 201!"
+        msgbox(format("Take that sample over to Dr. Fitzgerald on Route 201!"
                       "Just leave Eastbound out of Suncloak Town."))
     }
     release
@@ -160,7 +161,7 @@ script SuncloakDepths_B1F_Trigger_AfterPlayerTakesSample {
     applymovement(COAL_ID, CoalMoveFromRock)
     waitmovement(COAL_ID)
     msgbox(format("{PLAYER}, since you have our entire sample now,"
-                  "would you please take that over to Dr. DoctorName"
+                  "would you please take that over to Dr. Fitzgerald"
                   "at our lab? Let's see what they have to think.\p"
                   "Please try to keep that sample intact."))
 

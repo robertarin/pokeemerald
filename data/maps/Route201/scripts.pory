@@ -20,6 +20,7 @@ Route201_EventScript_Jon::
 Route201_Event_Script_CheckTrainersCompletion::
 	goto_if_not_defeated TRAINER_SEAN, Route201_EventScript_TrainersNotCompleted
 	goto_if_not_defeated TRAINER_JON, Route201_EventScript_TrainersNotCompleted
+	goto_if_not_defeated TRAINER_CAMPER_JIM, Route201_EventScript_TrainersNotCompleted
 	setflag FLAG_TRAINERS_DEFEATED_ROUTE_201
 	release
 	end
@@ -31,6 +32,7 @@ Route201_EventScript_TrainersNotCompleted::
 Route201_EventScript_ResetAllTrainers::
 	cleartrainerflag TRAINER_JON
 	cleartrainerflag TRAINER_SEAN
+	cleartrainerflag TRAINER_CAMPER_JIM
 	end
 
 Route201_EventScript_InfoSign::
@@ -103,7 +105,7 @@ text Route201_Text_CamperPostBattle {
 }
 
 script Route201_EventScript_Camper {
-	trainerbattle_single(TRAINER_JON, Route201_Text_CamperIntro, Route201_Text_CamperDefeated, Route201_Event_Script_CheckTrainersCompletion)
+	trainerbattle_single(TRAINER_CAMPER_JIM, Route201_Text_CamperIntro, Route201_Text_CamperDefeated, Route201_Event_Script_CheckTrainersCompletion)
 	msgbox(Route201_Text_CamperPostBattle, MSGBOX_AUTOCLOSE)
 }
 

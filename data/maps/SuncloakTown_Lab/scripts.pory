@@ -1,9 +1,17 @@
-const ASSISTANT_ID = 1
+const ASSISTANT_ID = 2
 
-mapscripts SuncloakTown_Lab_MapScripts {}
+mapscripts SuncloakTown_Lab_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION : SuncloakTown_Lab_OnTransition
+}
 
 // This map also uses VAR_SUNCLOAK_TUTORIAL_STATE for Pokestus tutorials
 // See SuncloakDepths_B1F/scripts.pory for info on the states there
+
+script SuncloakTown_Lab_OnTransition {
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) >= 9) {
+        clearflag(FLAG_SUNCLOAK_LAB_HIDE_COAL)
+    }
+}
 
 script SuncloakTown_Lab_EventScript_Assistant {
     lock
@@ -11,28 +19,52 @@ script SuncloakTown_Lab_EventScript_Assistant {
         msgbox(format("Maybe if I update the synthesis event here ..."))
         applymovement(ASSISTANT_ID, AssistantExclamation)
         faceplayer
-        msgbox(format("Ah! You must be our newest member, {PLAYER}. Professor Coal told me to outfit you. "
+        msgbox(format("Ah! You must be our newest member, {PLAYER}.\pProfessor Coal told me to outfit you.\p"
                       "First, here are some Pokeballs to keep you safe while you're out there."))
         giveitem(ITEM_POKE_BALL, 10)
         msgbox(format("As for supplies, we have just finished creating model zero of what we are calling the 'Pokestus'."))            
         giveitem(ITEM_POKESTUS, 1)
         msgbox(format("Using materials harvested from the recently downed meteors we have been able to synthesize "
                       "an infinitely rechargable Pokemon healing device!\p"
-                      "Sadly, the materials are incredibly hard to come by as the meteors primarily fell only "
-                      "in the most remote locations."
+                      "Sadly, the materials are incredibly hard to come by as the meteors primarily fell "
+                      "in remote locations."
                       "This one is brand new, and you will need to activate it "
-                      "at the synthesizer on the right side of the lab."
-                      "Go give it a try!"))    
+                      "at the Synthesizer on the right side of the lab.\p"
+                      "Here's a meteor shard to add its initial charge!"))
+        giveitem(ITEM_METEOR_SHARD, 1)
         setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 6)
     }
     elif(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 6) {
         faceplayer
-        msgbox(format("Go give the synthesizer a try!"))
+        msgbox(format("Go give the Synthesizer a try!"))
     }
     else {
         faceplayer
-        msgbox(format("If we had more meteor shards we could upgrade the Pokestus!"))
+        msgbox(format("If we had more meteor shards we could upgrade the Pokestus! Look for more when you're out in remote locations."))
     }
+    release
+}
+
+script SuncloakTown_Lab_EventScript_Assistant_Right {
+    lock
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 6) {
+        msgbox(format("You should go talk to the lead technician first. She has some things from Professor Coal for you."))
+    }
+    elif(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 6) {
+        faceplayer
+        msgbox(format("This is the Pokestus Synthesizer. It's ready for you to activate."))
+    }
+    else {
+        faceplayer
+        msgbox(format("If your Pokestus ever runs out, it will refill automatically when your pokemon are healed at a PokeCenter!"))
+    }
+    release
+}
+
+script SuncloakTown_Lab_EventScript_Coal {
+    lock
+    faceplayer
+    msgbox(format("I didn't think you'd make it this far!"))
     release
 }
 
@@ -42,17 +74,18 @@ script SuncloakTown_Lab_EventScript_Pokestus_Synthesizer {
         msgbox(format("This looks complicated.\nMaybe I shouldn't touch it."))
     }
     elif(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 6) {
-        msgbox(format("The Pokestus synthesizer whirrs to life."))
+        msgbox(format("The Pokestus Synthesizer whirrs to life."))
         msgbox("Press the blinking 'ENGAGE' button?", MSGBOX_YESNO)
         if(var(VAR_RESULT) == 1) {
             playse(SE_CLICK)
             special(PokestusRefill)
             setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 7)
-            msgbox(format("Your Pokestus has been activated!\nIt now has 1 charge."))
+            msgbox(format("Your Pokestus has been activated using the Meteor Shard!\nIt now has 1 charge.\pThe shard is consumed in the process."))
+            removeitem(ITEM_METEOR_SHARD)
         }
     }
     else {
-        msgbox(format("The Pokestus synthesizer whirrs to life."))
+        msgbox(format("The Pokestus Synthesizer whirrs to life."))
         checkitem(ITEM_METEOR_SHARD)
         if(var(VAR_RESULT) == 1) {
             msgbox("Do you wish to enhance your Pokestus\nwith a Meteor Shard?", MSGBOX_YESNO)
@@ -60,6 +93,7 @@ script SuncloakTown_Lab_EventScript_Pokestus_Synthesizer {
                 playse(SE_CLICK)
                 special(PokestusUpgradeCount)
                 msgbox(format("Your Pokestus has been enhanced."))
+                removeitem(ITEM_METEOR_SHARD)
             }
         }
         else {
@@ -70,6 +104,23 @@ script SuncloakTown_Lab_EventScript_Pokestus_Synthesizer {
     }
     
     release
+}
+
+script SuncloakTown_Lab_Trigger_BeforeLeaving_AfterPokestus {
+    lock
+    applymovement(ASSISTANT_ID, AssistantTowardsDoor)
+    setobjectxyperm(ASSISTANT_ID, 6, 4)
+    msgbox(format("Be careful out on Route 201.\nSuncloak is a rural town with dangerous Pokemon right on our doorstep.\p"
+                "You're renting a room from the old man in the house on the North-East side of town right?\p"
+                "Make sure you stop back there often to rest up and heal.\p"
+                "Good luck on your mission for the Professor. You're all set to go!"))
+    setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 8)
+    release
+}
+
+script SuncloakTown_Lab_Trigger_BeforeLeaving_BeforePokestus {
+    msgbox("Hey!\nDon't go before activating your Pokestus!", MSGBOX_AUTOCLOSE)
+    applymovement(OBJ_EVENT_ID_PLAYER, LabTutorialPushUp)
 }
 
 script SuncloakTown_Lab_EventScript_Bookshelf {
@@ -88,7 +139,12 @@ movement AssistantExclamation {
     emote_exclamation_mark
 }
 
-movement AssistantToSynthesizer {
-    walk_fast_right * 10
-    face_down
+movement AssistantTowardsDoor {
+    walk_fast_down
+    walk_fast_right * 3
+    walk_fast_down
+}
+
+movement LabTutorialPushUp {
+    walk_fast_up
 }

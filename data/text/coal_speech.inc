@@ -6,7 +6,7 @@ gText_Coal_Welcome::
 
 gText_Coal_Sorry::
 	.string "Sorry about that!\p"
-	.string "When you've been delving as long\n"
+	.string "When you've been researching as long\n"
 	.string "as I have, you get quite used to\l"
 	.string "the dark.\p"
 	.string "$"

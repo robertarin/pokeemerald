@@ -1505,8 +1505,8 @@
 #define FLAG_SUNCLOAK_DEPTHS_HIDE_COAL              (SYSTEM_FLAGS + 0x86)
 #define FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS             (SYSTEM_FLAGS + 0x87)
 #define FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY             (SYSTEM_FLAGS + 0x88)
-#define FLAG_SUNCLOAK_TOWN_PLAYER_HOUSE_UNVISITED     (SYSTEM_FLAGS + 0x89)
-#define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
+#define FLAG_SUNCLOAK_TOWN_PLAYER_HOUSE_UNVISITED   (SYSTEM_FLAGS + 0x89)
+#define FLAG_SUNCLOAK_LAB_HIDE_COAL                 (SYSTEM_FLAGS + 0x8A) // Unused Flag
 #define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag
 #define FLAG_UNUSED_0x8EC                           (SYSTEM_FLAGS + 0x8C) // Unused Flag
 #define FLAG_UNUSED_0x8ED                           (SYSTEM_FLAGS + 0x8D) // Unused Flag

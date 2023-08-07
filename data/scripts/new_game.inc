@@ -283,6 +283,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS
 	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY
 	setflag FLAG_SUNCLOAK_TOWN_PLAYER_HOUSE_UNVISITED
+	setflag FLAG_SUNCLOAK_LAB_HIDE_COAL
 	end
 
 EventScript_SuncloakStart::

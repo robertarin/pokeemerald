@@ -15,7 +15,7 @@ SuncloakDepths_B1F_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 
 
 SuncloakDepths_B1F_OnTransition::
-	compare VAR_SUNCLOAK_TUTORIAL_STATE, 8
+	compare VAR_SUNCLOAK_TUTORIAL_STATE, 9
 	goto_if_lt SuncloakDepths_B1F_OnTransition_1
 	return
 
@@ -300,28 +300,23 @@ SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_0:
 	.string "When Suncloak town was founded the\n"
 	.string "residents discovered that the caves\l"
 	.string "beneath had hundreds of fantastic\l"
-	.string "crystals.\p"
-	.string "$"
+	.string "crystals.$"
 
 SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_1:
 	.string "Over the last few hundred years they\n"
-	.string "have been looted and sold.\p"
-	.string "$"
+	.string "have been looted and sold.$"
 
 SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_2:
-	.string "Now only this single specimen remains.\p"
-	.string "$"
+	.string "Now only this single specimen remains.$"
 
 SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_3:
 	.string "We didn't think much of it until 4 days\n"
-	.string "ago when a meteor landed up by Mt Mntn.\p"
-	.string "$"
+	.string "ago when a meteor landed up by Mt Grey.$"
 
 SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_4:
 	.string "The meteor looked to be made of an\n"
 	.string "incredibly similar material to these\l"
-	.string "stones here.\p"
-	.string "$"
+	.string "stones here.$"
 
 SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_5:
 	.string "I believe this rock is from space!$"
@@ -329,14 +324,12 @@ SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_5:
 SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_6:
 	.string "Today, we're going to catalogue this\n"
 	.string "specimen and identify the origins of\l"
-	.string "these stones.\p"
-	.string "$"
+	.string "these stones.$"
 
 SuncloakDepths_B1F_OnFrame_IntroCoalSpeech_Text_7:
 	.string "Come up and check it out for\n"
 	.string "yourselves! {PLAYER}, you're up\l"
-	.string "first!\p"
-	.string "$"
+	.string "first!$"
 
 SuncloakDepths_B1F_EventScript_Coal_Text_0:
 	.string "Note the unique red color of the stone\n"
@@ -345,9 +338,9 @@ SuncloakDepths_B1F_EventScript_Coal_Text_0:
 	.string "of the cave. What could it mean?$"
 
 SuncloakDepths_B1F_EventScript_Coal_Text_1:
-	.string "Take that sample over to the lab on\n"
-	.string "Route 201! Just leave Eastbound out\l"
-	.string "of Suncloak Town.$"
+	.string "Take that sample over to Dr. Fitzgerald\n"
+	.string "on Route 201! Just leave Eastbound\l"
+	.string "out of Suncloak Town.$"
 
 SuncloakDepths_B1F_EventScript_Wally_Text_0:
 	.string "This is an amazing opportunity! Our\n"
@@ -395,8 +388,8 @@ SuncloakDepths_B1F_Trigger_AfterPlayerTakesSample_Text_1:
 SuncloakDepths_B1F_Trigger_AfterPlayerTakesSample_Text_2:
 	.string "{PLAYER}, since you have our entire\n"
 	.string "sample now, would you please take that\l"
-	.string "over to Dr. DoctorName at our lab?\l"
-	.string "Let's see what they have to think.\p"
+	.string "over to Dr. Fitzgerald at our lab? Let's\l"
+	.string "see what they have to think.\p"
 	.string "Please try to keep that sample intact.$"
 
 SuncloakDepths_B1F_Trigger_TutorialSuppliesInfo_Text_0:
