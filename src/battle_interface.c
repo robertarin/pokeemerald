@@ -306,6 +306,10 @@ static const union AnimCmd sSpriteAnim_TypeDark[] = {
     ANIMCMD_FRAME(TYPE_DARK * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
+static const union AnimCmd sSpriteAnim_TypeFairy[] = {
+    ANIMCMD_FRAME(TYPE_FAIRY * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
 
 static const union AnimCmd *const sSpriteAnimTable_TypeIcons[] =
 {
@@ -327,6 +331,7 @@ static const union AnimCmd *const sSpriteAnimTable_TypeIcons[] =
     sSpriteAnim_TypeIce,
     sSpriteAnim_TypeDragon,
     sSpriteAnim_TypeDark,
+    sSpriteAnim_TypeFairy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_TypeIcons =

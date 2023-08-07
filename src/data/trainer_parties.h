@@ -12468,6 +12468,6 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Sad_Lass[] = {
     {
     .iv = 0,
     .lvl = 7,
-    .species = SPECIES_BUIZEL,
+    .species = SPECIES_CLEFAIRY,
     }
 };
