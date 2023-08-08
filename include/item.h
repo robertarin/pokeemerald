@@ -76,6 +76,18 @@ u8 ItemId_GetFlingPower(u16 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
 
+// Ghoul's Item Desc Header changes
+void DrawHeaderBox(void);
+void HideHeaderBox(void);
+
+enum ItemObtainFlags
+{
+    FLAG_GET_OBTAINED,
+    FLAG_SET_OBTAINED,
+};
+bool8 GetSetItemObtained(u16 item, u8 caseId);
+// End Ghoul's Item Desc Header changes
+
 void PokestusRefill(void);
 void PokestusUpgradeCount(void);
 
