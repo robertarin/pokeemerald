@@ -187,6 +187,7 @@ void NewGameInitData(void)
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     gSaveBlock1Ptr->pokestusMaxCount = 1;
     gSaveBlock1Ptr->pokestusUpgrade = 0;
+    gSaveBlock1Ptr->levelCap = 12;
     ClearBag();
     NewGameInitPCItems();
     ClearPokeblocks();

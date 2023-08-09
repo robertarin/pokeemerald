@@ -577,4 +577,6 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 
+void LevelCapUpdate(void);
+
 #endif // GUARD_POKEMON_H

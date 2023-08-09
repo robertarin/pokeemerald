@@ -539,3 +539,4 @@ gSpecials::
 	def_special TrySpecialOverworldEvo
 	def_special PokestusRefill
 	def_special PokestusUpgradeCount
+	def_special LevelCapUpdate

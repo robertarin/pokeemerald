@@ -1085,7 +1085,8 @@ struct SaveBlock1
     /*0x3???*/ u8 pokestusUpgrade;
     /*0x3???*/ u8 pokestusMaxCount;
     /*0x3???*/ u16 pokestusCurrentCount;
-    // 80 bytes remaining now?
+    /*0x3???*/ u8 levelCap;
+    // 79 bytes remaining now?
     // sizeof: 0x3???
 };
 
