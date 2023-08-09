@@ -846,7 +846,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_BERSERK_GENE] = {gItemIcon_BerserkGene, gItemIconPalette_BerserkGene},
 
     // New items
-    [ITEM_POKESTUS] = {gItemIcon_Potion, gItemIconPalette_Potion},
+    [ITEM_POKESTUS] = {gItemIcon_Scanner, gItemIconPalette_Scanner}, // Scanner looks like a neat tech device
     [ITEM_METEOR_SHARD] = {gItemIcon_Meteorite, gItemIconPalette_Meteorite},
 
     // New story / quest items
