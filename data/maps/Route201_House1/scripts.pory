@@ -1,0 +1,15 @@
+const OLD_MAN_ID = 1
+
+mapscripts Route201_House1_MapScripts {}
+
+script Route201_House1_OldMan {
+	lock
+	applymovement(OLD_MAN_ID, Common_Movement_ExclamationMark)
+	msgbox(format("I already told you that you can threaten me all you want and I'll still never work for you!"))
+	applymovement(OLD_MAN_ID, Common_Movement_QuestionMark)
+	waitmovement(OLD_MAN_ID)
+	applymovement(OLD_MAN_ID, Common_Movement_FaceDown)
+	waitmovement(OLD_MAN_ID)
+	msgbox(format("Wait, you're not one of those thugs...\nWho are you?"))
+	release
+}

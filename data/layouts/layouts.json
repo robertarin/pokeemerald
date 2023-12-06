@@ -4520,6 +4520,16 @@
       "secondary_tileset": "gTileset_BrendansMaysHouse",
       "border_filepath": "data/layouts/SuncloakTown_PlayerHouse_B1F/border.bin",
       "blockdata_filepath": "data/layouts/SuncloakTown_PlayerHouse_B1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE201_CAVE",
+      "name": "Route201_Cave_Layout",
+      "width": 40,
+      "height": 35,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/Route201_Cave/border.bin",
+      "blockdata_filepath": "data/layouts/Route201_Cave/map.bin"
     }
   ]
 }
