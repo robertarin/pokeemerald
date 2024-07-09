@@ -1084,3 +1084,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/SuncloakTown_PlayerHouse_B1F/scripts.inc"
 
 	.include "data/maps/Route201_Cave/scripts.inc"
+
+	.include "data/maps/Route201_East/scripts.inc"
