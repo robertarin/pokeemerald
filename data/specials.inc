@@ -173,6 +173,7 @@ gSpecials::
 	def_special CableCar
 	def_special Overworld_PlaySpecialMapMusic
 	def_special StartWallClock
+	def_special SetWallClockToDefaults
 	def_special Special_ViewWallClock
 	def_special ChooseStarter
 	def_special StartWallyTutorialBattle
@@ -563,3 +564,5 @@ gSpecials::
 	def_special UseBlankMessageToCancelPokemonPic
 	def_special EnterCode
 	def_special GetCodeFeedback
+	def_special ResetPokestus
+	def_special PokestusUpgradeCount

@@ -1155,6 +1155,9 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
+    /*0x3???*/ u8 pokestusUpgrade;
+    /*0x3???*/ u8 pokestusMaxCount;
+    /*0x3???*/ u16 pokestusCurrentCount;
     // sizeof: 0x3???
 };
 

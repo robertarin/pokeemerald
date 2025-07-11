@@ -1,0 +1,275 @@
+const COAL_ID = 1
+const FLAG_HAS_TOUCHED_STONE = FLAG_TEMP_1
+
+// State descriptions for VAR_SUNCLOAK_TUTORIAL_STATE
+// 1: First time in Suncloak Depths. Coal used Flash for you.
+// 2: Initial Coal speech is done.
+// 3: Player clicked on the rock. Rock is changed to small rock
+// 4: Player sent to Route 201
+// 5: Player told about supplies
+// 6: Player received Pokestus / Pokeballs
+// 7: Pokestus activated.
+// 8: Assistant tells of dangers. Player ready for adventure! Coal still in Depths
+// 9: Something done on Route 201. All Tutorial states now complete. Coal back in lab
+
+mapscripts SuncloakDepths_B1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION : SuncloakDepths_B1F_OnTransition
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_SUNCLOAK_TUTORIAL_STATE, 1: SuncloakDepths_B1F_OnWarp_SetPlayerForIntro
+    ]
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_SUNCLOAK_TUTORIAL_STATE, 1: SuncloakDepths_B1F_OnFrame_IntroCoalSpeech
+    ]
+    MAP_SCRIPT_ON_LOAD : SuncloakDepths_B1F_OnLoad
+}
+
+script SuncloakDepths_B1F_OnTransition {
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 9) {
+        clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_COAL)
+        clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS)
+        clearflag(FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY)
+        setflashlevel(1)
+    }
+}
+
+script SuncloakDepths_B1F_OnLoad {
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) >= 3) {
+        setmetatile(22, 3, METATILE_Cave_ShoalCave_BlueStone_Small, TRUE)
+    }
+}
+
+script SuncloakDepths_B1F_OnWarp_SetPlayerForIntro {
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+}
+
+script SuncloakDepths_B1F_OnFrame_IntroCoalSpeech {
+    lock
+    applymovement(COAL_ID, CoalSpeech_WalkLeft)
+    msgbox(format("When Suncloak town was founded the residents"
+                    "discovered that the caves beneath had hundreds of fantastic crystals."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkRight)
+    msgbox(format("Over the last few hundred years they have been looted and sold."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkLeft)
+    msgbox(format("Now only this single specimen remains."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkRight)
+    msgbox(format("We didn't think much of it until 4 days ago when a meteor landed up by Mt Grey."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkLeft)
+    msgbox(format("The meteor looked to be made of an incredibly similar material to these stones here."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkFromLeftToCenter)
+    msgbox(format("I believe this rock is from space!"))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkFromCenterToRight)
+    msgbox(format("Today, we're going to catalogue this specimen and identify the origins of these stones."))
+    waitmovement(COAL_ID)
+    applymovement(COAL_ID, CoalSpeech_WalkOut)
+    waitmovement(COAL_ID)
+    msgbox(format("Come up and check it out for yourselves! {PLAYER}, you're up first!"))
+    setobjectxyperm(COAL_ID, 21, 6)     //Make Coal stay in this spot even if the player explores a bit
+    setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 2)
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Coal {
+    lock
+    faceplayer
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 4) {
+        msgbox(format("Note the unique red color of the stone near the specimen."
+                  "It is quite different from the brown of the rest of the cave."
+                  "What could it mean?"))
+    }
+    else {
+        msgbox(format("Take that sample over to Dr. Fitzgerald on Route 201!"
+                      "Just leave Eastbound out of Suncloak Town."))
+    }
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Wally {
+    lock
+    faceplayer
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) < 4) {
+        msgbox(format("This is an amazing opportunity! Our first day and already something exciting is happening!"))
+    }
+    else {
+        msgbox(format("I guess I'll stay here and look at rocks with the professor."))
+    }
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Sci1 {
+    lock
+    faceplayer
+    msgbox(format("Is this safe? Should you be wearing gloves?"))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Sci2 {
+    lock
+    faceplayer
+    msgbox(format("I don't remember hearing about a meteor landing..."))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Pikachu {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PIKACHU, CRY_MODE_NORMAL)
+    msgbox(format("Pika pika!"))
+    release
+}
+
+script SuncloakDepths_B1F_EventScript_Specimen {
+    lock
+    if(var(VAR_SUNCLOAK_TUTORIAL_STATE) == 2) {
+        if(!flag(FLAG_HAS_TOUCHED_STONE)) {
+            msgbox(format("You peer down at a cool blue stone."))
+            setflag(FLAG_HAS_TOUCHED_STONE)
+        }
+        msgbox("Take a sample?", MSGBOX_YESNO)
+        if(var(VAR_RESULT) == 1) {
+            playse(SE_CLICK)
+            setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 3)
+            setmetatile(22, 3, METATILE_Cave_ShoalCave_BlueStone_Small, TRUE)
+            special(DrawWholeMapView)
+            delay(10)
+            msgbox(format("You take a sample of the blue stone.\n"
+                          "The stone glimmers slightly less now."))
+            giveitem(ITEM_SUNCLOAK_DEPTHS_SAMPLE)
+        }
+    }
+    else {
+        msgbox(format("The last remaining blue stone from Suncloak Depths."
+                      "Now with a little less blue."))
+    }
+    release
+}
+
+script SuncloakDepths_B1F_Trigger_AfterPlayerTakesSample {
+    lock
+    applymovement(COAL_ID, CoalFaceRight)
+    msgbox(format("Ooof!\p"
+                  "Did you just crack open that entire thing!?"))
+    applymovement(COAL_ID, CoalExamineBlueRock)
+    applymovement(OBJ_EVENT_ID_PLAYER, PushPlayerBack)
+    waitmovement(COAL_ID)
+    msgbox(format("That is ... not entirely what I meant."))
+    applymovement(COAL_ID, CoalMoveFromRock)
+    waitmovement(COAL_ID)
+    msgbox(format("{PLAYER}, since you have our entire sample now,"
+                  "would you please take that over to Dr. Fitzgerald"
+                  "at our lab? Let's see what they have to think.\p"
+                  "Please try to keep that sample intact."))
+
+    setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 4)
+    release
+}
+
+script SuncloakDepths_B1F_Trigger_TutorialSuppliesInfo {
+    lock
+    msgbox(format("Wait! I almost forgot!"))
+    applymovement(COAL_ID, CoalRunToTellAboutSupplies)
+    msgbox(format("Stop by the lab at the south side of town for supplies before you go.\p"
+            "Route 201 is known to have a few\n"
+            "trainers who are looking to battle"
+            "as well as some wild pokemon.\p"
+            "Check with my assistant."))
+    setvar(VAR_SUNCLOAK_TUTORIAL_STATE, 5)
+    release
+}
+
+script SuncloakDepths_B1F_Trigger_TutorialPushRight {
+    applymovement(COAL_ID, JumpInPlaceDown)
+    msgbox(Tutorial_GoCheckOutRock)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, TutorialPushRight)
+}
+
+script SuncloakDepths_B1F_Trigger_TutorialPushLeft {
+    applymovement(COAL_ID, JumpInPlaceDown)
+    msgbox(Tutorial_GoCheckOutRock)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, TutorialPushLeft)
+}
+
+text Tutorial_GoCheckOutRock {
+    "Come on! Go check out the rock."
+}
+
+movement JumpInPlaceDown {
+    jump_in_place_down
+}
+
+movement PushPlayerBack {
+    lock_facing_direction
+    walk_fast_right
+    unlock_facing_direction
+    face_left
+}
+
+movement CoalMoveFromRock {
+    walk_fast_down * 2
+    walk_fast_left
+    face_down
+}
+
+movement CoalExamineBlueRock {
+    walk_fast_right
+    walk_fast_up * 2
+    jump_in_place_up * 3
+}
+
+movement CoalRunToTellAboutSupplies {
+    jump_in_place_right
+    walk_fast_right * 5
+    face_up
+}
+
+movement CoalFaceRight {
+    jump_in_place_right
+    emote_exclamation_mark
+}
+
+movement TutorialPushRight {
+    walk_fast_right
+}
+
+movement TutorialPushLeft {
+    walk_fast_left
+}
+
+movement PlayerJumpInPlaceRockSmashed {
+    jump_in_place_up
+}
+
+movement CoalSpeech_WalkLeft {
+    walk_slow_left * 4
+    face_down
+}
+
+movement CoalSpeech_WalkRight {
+    walk_slow_right * 4
+    face_down
+}
+
+movement CoalSpeech_WalkFromLeftToCenter {
+    walk_slow_right * 2
+    face_up
+    jump_in_place_up
+}
+
+movement CoalSpeech_WalkFromCenterToRight {
+    walk_slow_right * 2
+    face_down
+}
+
+movement CoalSpeech_WalkOut {
+    walk_left * 2
+    walk_down * 2
+    walk_left * 1
+    face_down
+}

@@ -50,9 +50,10 @@
 #include "follower_npc.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
+extern const u8 EventScript_SuncloakStart[];
 
 static void ClearFrontierRecord(void);
-static void WarpToTruck(void);
+static void WarpToStart(void);
 static void ResetMiniGamesRecords(void);
 static void ResetItemFlags(void);
 static void ResetDexNav(void);
@@ -129,9 +130,9 @@ static void ClearFrontierRecord(void)
     gSaveBlock2Ptr->frontier.opponentNames[1][0] = EOS;
 }
 
-static void WarpToTruck(void)
+static void WarpToStart(void)
 {
-    SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(MAP_SUNCLOAK_TOWN), MAP_NUM(MAP_SUNCLOAK_TOWN), WARP_ID_NONE, 26, 9);
     WarpIntoMap();
 }
 
@@ -188,6 +189,8 @@ void NewGameInitData(void)
     ResetPokemonStorageSystem();
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    gSaveBlock1Ptr->pokestusMaxCount = 1;
+    gSaveBlock1Ptr->pokestusUpgrade = 0;
     ClearBag();
     NewGameInitPCItems();
     ClearPokeblocks();
@@ -197,8 +200,9 @@ void NewGameInitData(void)
     InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
-    WarpToTruck();
+    WarpToStart();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
+    RunScriptImmediately(EventScript_SuncloakStart);
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();

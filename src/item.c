@@ -320,6 +320,14 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     u8 i;
     u16 totalQuantity = 0;
 
+    // We need to make sure we never remove the POKESTUS
+    // Most key items don't have to deal with this because they dont get "consumed" like medicine does
+    if(itemId == ITEM_POKESTUS)
+    {
+        HandlePokestusRemoveBagItem();
+        return TRUE;
+    }
+
     if (GetItemPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
         return FALSE;
 
@@ -401,6 +409,19 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
         }
         return TRUE;
     }
+}
+
+void HandlePokestusRemoveBagItem(void) 
+{
+    if (gSaveBlock1Ptr->pokestusCurrentCount > 0)
+    {
+        gSaveBlock1Ptr->pokestusCurrentCount = gSaveBlock1Ptr->pokestusCurrentCount - 1;
+    }
+}
+
+void ResetPokestus(void)
+{
+    gSaveBlock1Ptr->pokestusCurrentCount = gSaveBlock1Ptr->pokestusMaxCount;
 }
 
 u8 GetPocketByItemId(u16 itemId)
@@ -893,6 +914,8 @@ const u8 *GetItemEffect(u32 itemId)
     #else
         return 0;
     #endif //FREE_ENIGMA_BERRY
+    else if (itemId == ITEM_POKESTUS)
+        return gPokestusEffectTable[gSaveBlock1Ptr->pokestusUpgrade];
     else
         return gItemsInfo[SanitizeItemId(itemId)].effect;
 }
@@ -1017,4 +1040,10 @@ u32 GetItemStatus2Mask(u16 itemId)
 u32 GetItemSellPrice(u32 itemId)
 {
     return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
+}
+
+void PokestusUpgradeCount(void)
+{
+    gSaveBlock1Ptr->pokestusMaxCount = gSaveBlock1Ptr->pokestusMaxCount + 1;
+    ResetPokestus();
 }

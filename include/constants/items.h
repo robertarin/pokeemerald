@@ -991,13 +991,19 @@
 #define ITEM_SWAP_SNACK 825
 #define ITEM_TWICE_SPICED_RADISH 826
 #define ITEM_POKESHI_DOLL 827
-
 #define ITEM_STRANGE_BALL 828
+#define ITEM_POKESTUS 829
+
+// NEW STORY / QUEST ITEMS
+#define ITEM_METEOR_SHARD 830
+#define ITEM_SUNCLOAK_DEPTHS_SAMPLE 831
+
+
 
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 829
+#define ITEMS_COUNT 832
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
@@ -1077,5 +1083,12 @@
 
 // Enigma Berry dummy constant
 #define EFFECT_ITEM_ENIGMA_BERRY_EREADER    1
+
+// Pokestus related definitions
+#define POKESTUS_NUM_UPGRADES 5         // Number of upgrades for pokestus
+#define POKESTUS_DEFAULT_UPGRADE 0      // Default to 0 upgrades
+#define POKESTUS_DEFAULT_COUNT 3        // Default to having 3 max
+#define POKESTUS_UPGRADE_DIGITS 1
+#define POKESTUS_CAPACITY_DIGITS 2
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

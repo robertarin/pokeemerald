@@ -138,6 +138,23 @@ static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
                                           "is unsuitable for\n"
                                           "local soil.");
 
+// New story key items
+static const u8 sPokestusDesc[] = _(
+    "Heals your\n"
+    "Pokemon. Has\n"
+    "limited charges.");                                        
+
+static const u8 sMeteorShardDesc[] = _(
+    "Shard of unknown\n"
+    "material. Used\n"
+    "to upgrade PKSTS.");
+
+// New story key items
+static const u8 sSuncloakDepthsSampleDesc[] = _(
+    "A sample taken from\n"
+    "a bright blue stone\n"
+    "under Suncloak Town");
+
 const struct Item gItemsInfo[] =
 {
     [ITEM_NONE] =
@@ -14141,4 +14158,38 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    // New story / quest items
+    [ITEM_POKESTUS] =
+    {
+        .name = _("Pokestus"),
+        .price = 0,
+        .description = sPokestusDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Pokestus,
+        .iconPic = gItemIcon_Potion,
+        .iconPalette = gItemIconPalette_Potion,
+    },
+    [ITEM_METEOR_SHARD] =
+    {
+        .name = _("Meteor Shard"),
+        .price = 0,
+        .description = sMeteorShardDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+    [ITEM_SUNCLOAK_DEPTHS_SAMPLE] =
+    {
+        .name = _("Stone Sample"),
+        .price = 0,
+        .description = sSuncloakDepthsSampleDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    }
 };
