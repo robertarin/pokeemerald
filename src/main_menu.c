@@ -2254,7 +2254,9 @@ static void CreateStarterSprites(u8 taskId)
     // Create the starter pokemon sprites
     u8 i;
     for (i = 0; i < STARTER_MON_COUNT; i++) {
-        sStarterSpriteIds[i] = CreateMonPicSprite_Affine(GetStarterPokemon(i), SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, 180, 60, 0, TAG_NONE);
+        bool32 isShiny = FALSE;
+        u16 species = GetStarterPokemon(i);
+        sStarterSpriteIds[i] = CreateMonPicSprite_Affine(species, FALSE, 0, MON_PIC_AFFINE_FRONT, 180, 60, 0, species);
         gSprites[sStarterSpriteIds[i]].callback = SpriteCB_Null;
         gSprites[sStarterSpriteIds[i]].invisible = TRUE;
         gSprites[sStarterSpriteIds[i]].oam.priority = 0;
