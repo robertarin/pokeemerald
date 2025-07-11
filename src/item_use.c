@@ -97,27 +97,27 @@ static const u8 sText_PlayedPokeFlute[] = _("Played the POKé FLUTE.");
 static const u8 sText_PokeFluteAwakenedMon[] = _("The POKé FLUTE awakened sleeping\nPOKéMON.{PAUSE_UNTIL_PRESS}");
 
 // EWRAM variables
-EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
+EWRAM_DATA static void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
 // Below is set TRUE by UseRegisteredKeyItemOnField
-#define tUsingRegisteredKeyItem  data[3]
+#define tUsingRegisteredKeyItem data[3]
 
 // UB here if an item with type ITEM_USE_MAIL or ITEM_USE_BAG_MENU uses SetUpItemUseCallback
 // Never occurs in vanilla, but can occur with improperly created items
 static const MainCallback sItemUseCallbacks[] =
-{
-    [ITEM_USE_PARTY_MENU - 1]       = CB2_ShowPartyMenuForItemUse,
-    [ITEM_USE_FIELD - 1]            = CB2_ReturnToField,
-    [ITEM_USE_PBLOCK_CASE - 1]      = NULL,
-    [ITEM_USE_PARTY_MENU_MOVES - 1] = CB2_ShowPartyMenuForItemUse,
+    {
+        [ITEM_USE_PARTY_MENU - 1] = CB2_ShowPartyMenuForItemUse,
+        [ITEM_USE_FIELD - 1] = CB2_ReturnToField,
+        [ITEM_USE_PBLOCK_CASE - 1] = NULL,
+        [ITEM_USE_PARTY_MENU_MOVES - 1] = CB2_ShowPartyMenuForItemUse,
 };
 
 static const u8 sClockwiseDirections[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST};
 
 static const struct YesNoFuncTable sUseTMHMYesNoFuncTable =
-{
-    .yesFunc = UseTMHM,
-    .noFunc = CloseItemMessage,
+    {
+        .yesFunc = UseTMHM,
+        .noFunc = CloseItemMessage,
 };
 
 #define tEnigmaBerryType data[4]
@@ -223,7 +223,7 @@ void ItemUseOutOfBattle_Mail(u8 taskId)
     Task_FadeAndCloseBagMenu(taskId);
 }
 
-STATIC_ASSERT(I_EXP_SHARE_ITEM < GEN_6 || I_EXP_SHARE_FLAG > TEMP_FLAGS_END, YouNeedToSetAFlagToUseGen6ExpShare);
+STATIC_ASSERT(I_EXP_SHARE_ITEM<GEN_6 || I_EXP_SHARE_FLAG> TEMP_FLAGS_END, YouNeedToSetAFlagToUseGen6ExpShare);
 
 void ItemUseOutOfBattle_ExpShare(u8 taskId)
 {
@@ -354,12 +354,12 @@ static void ItemUseOnFieldCB_Itemfinder(u8 taskId)
 }
 
 // Define itemfinder task data
-#define tItemDistanceX    data[0]
-#define tItemDistanceY    data[1]
-#define tItemFound        data[2]
-#define tCounter          data[3] // Used to count delay between beeps and rotations during player spin
-#define tItemfinderBeeps  data[4]
-#define tFacingDir        data[5]
+#define tItemDistanceX data[0]
+#define tItemDistanceY data[1]
+#define tItemFound data[2]
+#define tCounter data[3] // Used to count delay between beeps and rotations during player spin
+#define tItemfinderBeeps data[4]
+#define tFacingDir data[5]
 
 static void Task_UseItemfinder(u8 taskId)
 {
@@ -513,10 +513,7 @@ static void CheckForHiddenItemsInMapConnection(u8 taskId)
     {
         for (y = playerY - 5; y <= playerY + 5; y++)
         {
-            if (var1 > x
-             || x >= width
-             || var2 > y
-             || y >= height)
+            if (var1 > x || x >= width || var2 > y || y >= height)
             {
                 const struct MapConnection *conn = GetMapConnectionAtPos(x, y);
                 if (conn && IsHiddenItemPresentInConnection(conn, x, y) == TRUE)
@@ -546,13 +543,13 @@ static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 itemDistanceX, s16 ite
         if (tItemDistanceX < 0)
             oldItemAbsX = tItemDistanceX * -1; // WEST
         else
-            oldItemAbsX = tItemDistanceX;      // EAST
+            oldItemAbsX = tItemDistanceX; // EAST
 
         // Get absolute y distance of the already-found item
         if (tItemDistanceY < 0)
             oldItemAbsY = tItemDistanceY * -1; // NORTH
         else
-            oldItemAbsY = tItemDistanceY;      // SOUTH
+            oldItemAbsY = tItemDistanceY; // SOUTH
 
         // Get absolute x distance of the newly-found item
         if (itemDistanceX < 0)
@@ -566,7 +563,6 @@ static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 itemDistanceX, s16 ite
         else
             newItemAbsY = itemDistanceY;
 
-
         if (oldItemAbsX + oldItemAbsY > newItemAbsX + newItemAbsY)
         {
             // New item is closer
@@ -575,8 +571,7 @@ static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 itemDistanceX, s16 ite
         }
         else
         {
-            if (oldItemAbsX + oldItemAbsY == newItemAbsX + newItemAbsY
-            && (oldItemAbsY > newItemAbsY || (oldItemAbsY == newItemAbsY && tItemDistanceY < itemDistanceY)))
+            if (oldItemAbsX + oldItemAbsY == newItemAbsX + newItemAbsY && (oldItemAbsY > newItemAbsY || (oldItemAbsY == newItemAbsY && tItemDistanceY < itemDistanceY)))
             {
                 // If items are equal distance, use whichever is closer on the Y axis or further south
                 tItemDistanceX = itemDistanceX;
@@ -650,8 +645,7 @@ static void Task_StandingOnHiddenItem(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]) == TRUE
-    || tItemFound == FALSE)
+    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]) == TRUE || tItemFound == FALSE)
     {
         // Spin player around on item
         PlayerFaceHiddenItem(sClockwiseDirections[tFacingDir]);
@@ -962,9 +956,9 @@ static void Task_UseRepel(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(gSpecialVar_ItemId));
-    #if VAR_LAST_REPEL_LURE_USED != 0
+#if VAR_LAST_REPEL_LURE_USED != 0
         VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
-    #endif
+#endif
         RemoveUsedItem();
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
@@ -991,7 +985,7 @@ void ItemUseOutOfBattle_Lure(u8 taskId)
 
 static void Task_StartUseLure(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (++data[8] > 7)
     {
@@ -1006,9 +1000,9 @@ static void Task_UseLure(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(gSpecialVar_ItemId) | REPEL_LURE_MASK);
-    #if VAR_LAST_REPEL_LURE_USED != 0
+#if VAR_LAST_REPEL_LURE_USED != 0
         VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
-    #endif
+#endif
         RemoveUsedItem();
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
@@ -1026,7 +1020,7 @@ void HandleUseExpiredLure(struct ScriptContext *ctx)
 
 static void Task_UsedBlackWhiteFlute(u8 taskId)
 {
-    if(++gTasks[taskId].data[8] > 7)
+    if (++gTasks[taskId].data[8] > 7)
     {
         PlaySE(SE_GLASS_FLUTE);
         if (!InBattlePyramid())
@@ -1106,8 +1100,7 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 static u32 GetBallThrowableState(void)
 {
-    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
-     && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
         return BALL_THROW_UNABLE_TWO_MONS;
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
         return BALL_THROW_UNABLE_NO_ROOM;
@@ -1206,13 +1199,12 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
 {
     u16 battleUsage = GetItemBattleUsage(itemId);
     bool8 cannotUse = FALSE;
-    const u8* failStr = NULL;
+    const u8 *failStr = NULL;
     u32 i;
     u16 hp = GetMonData(mon, MON_DATA_HP);
 
     // Embargo Check
-    if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
-        || (gPartyMenu.slotId == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
+    if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO) || (gPartyMenu.slotId == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
     {
         return TRUE;
     }
@@ -1272,14 +1264,11 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_CURE_STATUS:
-        if (!((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
-            || SelectedMonHasStatus2(itemId)))
+        if (!((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId)) || SelectedMonHasStatus2(itemId)))
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_HEAL_AND_CURE_STATUS:
-        if ((hp == 0 || hp == GetMonData(mon, MON_DATA_MAX_HP))
-            && !((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
-            || SelectedMonHasStatus2(itemId)))
+        if ((hp == 0 || hp == GetMonData(mon, MON_DATA_MAX_HP)) && !((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId)) || SelectedMonHasStatus2(itemId)))
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_REVIVE:
@@ -1455,7 +1444,7 @@ void ItemUseOutOfBattle_Fusion(u8 taskId)
 
 void Task_UseHoneyOnField(u8 taskId)
 {
-    //ResetInitialPlayerAvatarState();
+    // ResetInitialPlayerAvatarState();
     StartSweetScentFieldEffect();
     DestroyTask(taskId);
 }
@@ -1489,35 +1478,36 @@ static bool32 IsValidLocationForVsSeeker(void)
     u16 mapNum = gSaveBlock1Ptr->location.mapNum;
     u16 mapType = gMapHeader.mapType;
 
-    typedef struct {
+    typedef struct
+    {
         u16 mapGroup;
         u16 mapNum;
     } Location;
 
     u32 i;
     Location validIndoorLocations[] =
-    {
-        { MAP_GROUP(MAP_MT_PYRE_SUMMIT),           MAP_NUM(MAP_MT_PYRE_SUMMIT) },
-        { MAP_GROUP(MAP_SAFARI_ZONE_NORTH),        MAP_NUM(MAP_SAFARI_ZONE_NORTH) },
-        { MAP_GROUP(MAP_SAFARI_ZONE_NORTHEAST),    MAP_NUM(MAP_SAFARI_ZONE_NORTHEAST) },
-        { MAP_GROUP(MAP_SAFARI_ZONE_NORTHWEST),    MAP_NUM(MAP_SAFARI_ZONE_NORTHWEST) },
-        { MAP_GROUP(MAP_SAFARI_ZONE_SOUTH),        MAP_NUM(MAP_SAFARI_ZONE_SOUTH) },
-        { MAP_GROUP(MAP_SAFARI_ZONE_SOUTHEAST),    MAP_NUM(MAP_SAFARI_ZONE_SOUTHEAST) },
-        { MAP_GROUP(MAP_SAFARI_ZONE_SOUTHWEST),    MAP_NUM(MAP_SAFARI_ZONE_SOUTHWEST) },
-        { MAP_GROUP(MAP_SKY_PILLAR_TOP),           MAP_NUM(MAP_SKY_PILLAR_TOP) },
-        { MAP_GROUP(MAP_SOUTHERN_ISLAND_EXTERIOR), MAP_NUM(MAP_SOUTHERN_ISLAND_EXTERIOR) },
-        { MAP_GROUP(MAP_SOUTHERN_ISLAND_INTERIOR), MAP_NUM(MAP_SOUTHERN_ISLAND_INTERIOR) },
-        { MAP_GROUP(MAP_RUSTBORO_CITY_GYM),        MAP_NUM(MAP_RUSTBORO_CITY_GYM) },
-        { MAP_GROUP(MAP_DEWFORD_TOWN_GYM),         MAP_NUM(MAP_DEWFORD_TOWN_GYM) },
-        { MAP_GROUP(MAP_MAUVILLE_CITY_GYM),        MAP_NUM(MAP_MAUVILLE_CITY_GYM) },
-        { MAP_GROUP(MAP_LAVARIDGE_TOWN_GYM_1F),    MAP_NUM(MAP_LAVARIDGE_TOWN_GYM_1F) },
-        { MAP_GROUP(MAP_LAVARIDGE_TOWN_GYM_B1F),   MAP_NUM(MAP_LAVARIDGE_TOWN_GYM_B1F) },
-        { MAP_GROUP(MAP_PETALBURG_CITY_GYM),       MAP_NUM(MAP_PETALBURG_CITY_GYM) },
-        { MAP_GROUP(MAP_FORTREE_CITY_GYM),         MAP_NUM(MAP_FORTREE_CITY_GYM) },
-        { MAP_GROUP(MAP_MOSSDEEP_CITY_GYM),        MAP_NUM(MAP_MOSSDEEP_CITY_GYM) },
-        { MAP_GROUP(MAP_SOOTOPOLIS_CITY_GYM_1F),   MAP_NUM(MAP_SOOTOPOLIS_CITY_GYM_1F) },
-        { MAP_GROUP(MAP_SOOTOPOLIS_CITY_GYM_B1F),  MAP_NUM(MAP_SOOTOPOLIS_CITY_GYM_B1F) },
-    };
+        {
+            {MAP_GROUP(MAP_MT_PYRE_SUMMIT), MAP_NUM(MAP_MT_PYRE_SUMMIT)},
+            {MAP_GROUP(MAP_SAFARI_ZONE_NORTH), MAP_NUM(MAP_SAFARI_ZONE_NORTH)},
+            {MAP_GROUP(MAP_SAFARI_ZONE_NORTHEAST), MAP_NUM(MAP_SAFARI_ZONE_NORTHEAST)},
+            {MAP_GROUP(MAP_SAFARI_ZONE_NORTHWEST), MAP_NUM(MAP_SAFARI_ZONE_NORTHWEST)},
+            {MAP_GROUP(MAP_SAFARI_ZONE_SOUTH), MAP_NUM(MAP_SAFARI_ZONE_SOUTH)},
+            {MAP_GROUP(MAP_SAFARI_ZONE_SOUTHEAST), MAP_NUM(MAP_SAFARI_ZONE_SOUTHEAST)},
+            {MAP_GROUP(MAP_SAFARI_ZONE_SOUTHWEST), MAP_NUM(MAP_SAFARI_ZONE_SOUTHWEST)},
+            {MAP_GROUP(MAP_SKY_PILLAR_TOP), MAP_NUM(MAP_SKY_PILLAR_TOP)},
+            {MAP_GROUP(MAP_SOUTHERN_ISLAND_EXTERIOR), MAP_NUM(MAP_SOUTHERN_ISLAND_EXTERIOR)},
+            {MAP_GROUP(MAP_SOUTHERN_ISLAND_INTERIOR), MAP_NUM(MAP_SOUTHERN_ISLAND_INTERIOR)},
+            {MAP_GROUP(MAP_RUSTBORO_CITY_GYM), MAP_NUM(MAP_RUSTBORO_CITY_GYM)},
+            {MAP_GROUP(MAP_DEWFORD_TOWN_GYM), MAP_NUM(MAP_DEWFORD_TOWN_GYM)},
+            {MAP_GROUP(MAP_MAUVILLE_CITY_GYM), MAP_NUM(MAP_MAUVILLE_CITY_GYM)},
+            {MAP_GROUP(MAP_LAVARIDGE_TOWN_GYM_1F), MAP_NUM(MAP_LAVARIDGE_TOWN_GYM_1F)},
+            {MAP_GROUP(MAP_LAVARIDGE_TOWN_GYM_B1F), MAP_NUM(MAP_LAVARIDGE_TOWN_GYM_B1F)},
+            {MAP_GROUP(MAP_PETALBURG_CITY_GYM), MAP_NUM(MAP_PETALBURG_CITY_GYM)},
+            {MAP_GROUP(MAP_FORTREE_CITY_GYM), MAP_NUM(MAP_FORTREE_CITY_GYM)},
+            {MAP_GROUP(MAP_MOSSDEEP_CITY_GYM), MAP_NUM(MAP_MOSSDEEP_CITY_GYM)},
+            {MAP_GROUP(MAP_SOOTOPOLIS_CITY_GYM_1F), MAP_NUM(MAP_SOOTOPOLIS_CITY_GYM_1F)},
+            {MAP_GROUP(MAP_SOOTOPOLIS_CITY_GYM_B1F), MAP_NUM(MAP_SOOTOPOLIS_CITY_GYM_B1F)},
+        };
 
     if (IsMapTypeOutdoors(mapType))
         return TRUE;
@@ -1611,6 +1601,20 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
     {
         // TODO: handle key items with callbacks to menus allow to be used by registering them.
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+}
+
+void ItemUseOutOfBattle_Pokestus(u8 taskId)
+{
+    // Clicking on an empty Pokestus will immediately show an error dialog
+    if (gSaveBlock1Ptr->pokestusCurrentCount == 0)
+    {
+        DisplayCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem, gText_Pokestus_Empty);
+    }
+    else
+    {
+        gItemUseCB = ItemUseCB_Medicine;
+        SetUpItemUseCallback(taskId);
     }
 }
 

@@ -320,6 +320,7 @@ extern const u8 gText_ICanPayVar1[];
 extern const u8 gText_TurnedOverVar1ForVar2[];
 extern const u8 gText_ThreeDashes[];
 extern const u8 *const gPocketNamesStringsTable[];
+extern const u8 gText_plusVar1[];
 
 // party menu text
 extern const u8 gText_PkmnHPRestoredByVar2[];
@@ -2425,5 +2426,8 @@ extern const u8 gText_Rename[]; // change nickname from summary screen
 
 // Switch Caught Mon into Party
 extern const u8 gText_CannotSendMonToBoxHM[];
+
+// Pokestus text
+extern const u8 gText_Pokestus_Empty[];
 
 #endif // GUARD_STRINGS_H

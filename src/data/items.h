@@ -138,6 +138,11 @@ static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
                                           "is unsuitable for\n"
                                           "local soil.");
 
+static const u8 sPokestusDesc[] = _(
+    "Heals your\n"
+    "Pokemon. Has\n"
+    "limited charges.");                                        
+
 const struct Item gItemsInfo[] =
 {
     [ITEM_NONE] =
@@ -14140,5 +14145,18 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
+    },
+
+    [ITEM_POKESTUS] =
+    {
+        .name = _("Pokestus"),
+        .price = 0,
+        .description = sPokestusDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Pokestus,
+        .iconPic = gItemIcon_Potion,
+        .iconPalette = gItemIconPalette_Potion,
     },
 };

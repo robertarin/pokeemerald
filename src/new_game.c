@@ -188,6 +188,8 @@ void NewGameInitData(void)
     ResetPokemonStorageSystem();
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    gSaveBlock1Ptr->pokestusMaxCount = 1;
+    gSaveBlock1Ptr->pokestusUpgrade = 0;
     ClearBag();
     NewGameInitPCItems();
     ClearPokeblocks();
