@@ -314,3 +314,4 @@ EventScript_SuncloakStart::
 	@ Suncloak intro management
 	setvar VAR_SUNCLOAK_TUTORIAL_STATE, 1
 	end
+	

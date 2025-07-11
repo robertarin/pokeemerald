@@ -283,6 +283,7 @@ extern const u8 gText_ThisIsAPokemon[];
 extern const u8 gText_Birch_MainSpeech[];
 extern const u8 gText_Birch_AndYouAre[];
 extern const u8 gText_Birch_BoyOrGirl[];
+extern const u8 gText_Birch_WhatStarter[];
 extern const u8 gText_Birch_WhatsYourName[];
 extern const u8 gText_Birch_SoItsPlayer[];
 extern const u8 gText_Birch_YourePlayer[];
@@ -290,6 +291,16 @@ extern const u8 gText_Birch_AreYouReady[];
 
 extern const u8 gText_BirchInTrouble[];
 extern const u8 gText_ConfirmStarterChoice[];
+
+// Intro Coal speech
+extern const u8 gText_Coal_Welcome[];
+extern const u8 gText_Coal_UseFlash[];
+extern const u8 gText_Coal_Sorry[];
+extern const u8 gText_Coal_MainSpeech[];
+extern const u8 gText_Coal_Introduce[];
+extern const u8 gText_Coal_WelcomePlayerName[];
+extern const u8 gText_Coal_WhatStarter[];
+extern const u8 gText_Coal_LetsGetStarted[];
 
 // mystery event menu text
 extern const u8 gText_EventSafelyLoaded[];
