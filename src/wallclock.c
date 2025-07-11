@@ -683,6 +683,11 @@ static void WallClockInit(void)
     ShowBg(3);
 }
 
+void CB2_SetWallClockToDefaults(void)
+{
+    RtcInitLocalTimeOffset(0, 0);
+}
+
 void CB2_StartWallClock(void)
 {
     u8 taskId;

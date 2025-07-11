@@ -110,6 +110,10 @@ EventScript_ResetAllBerries::
 
 	@ Mirage Island
 	setberrytree BERRY_TREE_ROUTE_130_LIECHI, ITEM_TO_BERRY(ITEM_LIECHI_BERRY), BERRY_STAGE_BERRIES
+
+	@ Suncloak
+	setberrytree BERRY_TREE_SUNCLOAK_ORAN,  ITEM_TO_BERRY(ITEM_ORAN_BERRY),  BERRY_STAGE_BERRIES
+	setberrytree BERRY_TREE_SUNCLOAK_CHERI, ITEM_TO_BERRY(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES
 	return
 
 EventScript_ResetAllMapFlags::
@@ -273,4 +277,40 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	setflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
 	call EventScript_ResetAllBerries
+
+	@ New flags start here
+	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_COAL
+	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_PEERS
+	setflag FLAG_SUNCLOAK_DEPTHS_HIDE_WALLY
+	setflag FLAG_SUNCLOAK_TOWN_PLAYER_HOUSE_UNVISITED
+	setflag FLAG_SUNCLOAK_LAB_HIDE_COAL
+	end
+
+EventScript_SuncloakStart::
+	@ FLAG_ADVENTURE_STARTED lets us go past OldaleTown and buy pokeballs from OldaleTown_Mart.
+	setflag FLAG_ADVENTURE_STARTED
+	setrespawn HEAL_LOCATION_SUNCLOAK_TOWN
+
+	@ Enable running shoes.
+	setflag FLAG_RECEIVED_RUNNING_SHOES
+	setflag FLAG_SYS_B_DASH
+
+	@ Get clock events running.
+	special SetWallClockToDefaults
+	setflag FLAG_SET_WALL_CLOCK
+
+	@ Pokedex
+	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	special SetUnlockedPokedexFlags
+	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 2 	@Usually when you get your pokedex this is set to 1, but who needs a tutorial anyways
+
+	@ Hide some of the old tutorial state NPCs and objects. I don't feel like removing these quite yet.
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
+	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
+	setflag FLAG_HIDE_ROUTE_103_RIVAL
+	
+	@ Suncloak intro management
+	setvar VAR_SUNCLOAK_TUTORIAL_STATE, 1
 	end

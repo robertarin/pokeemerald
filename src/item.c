@@ -1041,3 +1041,9 @@ u32 GetItemSellPrice(u32 itemId)
 {
     return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
 }
+
+void PokestusUpgradeCount(void)
+{
+    gSaveBlock1Ptr->pokestusMaxCount = gSaveBlock1Ptr->pokestusMaxCount + 1;
+    ResetPokestus();
+}

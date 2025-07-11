@@ -1157,3 +1157,13 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 	.include "data/scripts/dexnav.inc"
+	.include "data/maps/SuncloakTown/scripts.inc"
+	.include "data/maps/SuncloakTown_PlayerHouse/scripts.inc"
+	.include "data/maps/SuncloakTown_PlayerHouse2/scripts.inc"
+	.include "data/maps/SuncloakTown_House1/scripts.inc"
+	.include "data/maps/SuncloakTown_House2/scripts.inc"
+	.include "data/maps/SuncloakDepths_Entrance/scripts.inc"
+	.include "data/maps/SuncloakTown_Lab/scripts.inc"
+	.include "data/maps/SuncloakDepths_B1F/scripts.inc"
+
+	.include "data/maps/SuncloakTown_PlayerHouse_B1F/scripts.inc"
