@@ -300,8 +300,12 @@ EventScript_SuncloakStart::
 	setflag FLAG_SET_WALL_CLOCK
 
 	@ Pokedex
-	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_SYS_POKEDEX_GET
 	special SetUnlockedPokedexFlags
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
+	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 2 	@Usually when you get your pokedex this is set to 1, but who needs a tutorial anyways
 
 	@ Hide some of the old tutorial state NPCs and objects. I don't feel like removing these quite yet.
