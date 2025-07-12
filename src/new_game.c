@@ -133,7 +133,7 @@ static void ClearFrontierRecord(void)
 
 static void WarpToStart(void)
 {
-    SetWarpDestination(MAP_GROUP(MAP_SUNCLOAK_TOWN), MAP_NUM(MAP_SUNCLOAK_TOWN), WARP_ID_NONE, 26, 9);
+    SetWarpDestination(MAP_GROUP(MAP_SUNCLOAK_DEPTHS_B1F), MAP_NUM(MAP_SUNCLOAK_DEPTHS_B1F), WARP_ID_NONE, 22, 7);
     WarpIntoMap();
 }
 
