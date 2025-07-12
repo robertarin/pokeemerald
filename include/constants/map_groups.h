@@ -68,6 +68,7 @@
 #define MAP_UNDERWATER_ROUTE105 (55 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE125 (56 | (0 << 8))
 #define MAP_SUNCLOAK_TOWN       (57 | (0 << 8))
+#define MAP_ROUTE201            (58 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))
@@ -407,6 +408,7 @@
 #define MAP_METEOR_FALLS_STEVENS_CAVE                (107 | (24 << 8))
 #define MAP_SUNCLOAK_DEPTHS_ENTRANCE                 (108 | (24 << 8))
 #define MAP_SUNCLOAK_DEPTHS_B1F                      (109 | (24 << 8))
+#define MAP_ROUTE201_CAVE                            (110 | (24 << 8))
 
 // gMapGroup_IndoorDynamic
 #define MAP_SECRET_BASE_RED_CAVE1    (0 | (25 << 8))
@@ -598,14 +600,17 @@
 // gMapGroup_IndoorRoute124
 #define MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE (0 | (33 << 8))
 
-// gMapGroup_IndoorSuncloak
-#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE     (0 | (34 << 8))
-#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE2    (1 | (34 << 8))
-#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE_B1F (2 | (34 << 8))
-#define MAP_SUNCLOAK_TOWN_HOUSE1           (3 | (34 << 8))
-#define MAP_SUNCLOAK_TOWN_HOUSE2           (4 | (34 << 8))
-#define MAP_SUNCLOAK_TOWN_LAB              (5 | (34 << 8))
+// gMapGroup_IndoorRoute201
+#define MAP_ROUTE201_HOUSE1 (0 | (34 << 8))
 
-#define MAP_GROUPS_COUNT 35
+// gMapGroup_IndoorSuncloak
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE     (0 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE2    (1 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_PLAYER_HOUSE_B1F (2 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_HOUSE1           (3 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_HOUSE2           (4 | (35 << 8))
+#define MAP_SUNCLOAK_TOWN_LAB              (5 | (35 << 8))
+
+#define MAP_GROUPS_COUNT 36
 
 #endif // GUARD_CONSTANTS_MAP_GROUPS_H

@@ -42178,3 +42178,133 @@ F_TRAINER_FEMALE |
             },
         },
     },
+#line 16877
+    [DIFFICULTY_NORMAL][TRAINER_SEAN] =
+    {
+#line 16878
+        .trainerName = _("SEAN"),
+#line 16879
+        .trainerClass = TRAINER_CLASS_CAMPER,
+#line 16880
+        .trainerPic = TRAINER_PIC_CAMPER,
+        .encounterMusic_gender =
+#line 16882
+            TRAINER_ENCOUNTER_MUSIC_MALE,
+#line 16883
+        .battleType = TRAINER_BATTLE_TYPE_SINGLES,
+#line 16884
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16886
+            .species = SPECIES_WURMPLE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16888
+            .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
+#line 16887
+            .lvl = 5,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 16890
+    [DIFFICULTY_NORMAL][TRAINER_JON] =
+    {
+#line 16891
+        .trainerName = _("JON"),
+#line 16892
+        .trainerClass = TRAINER_CLASS_CAMPER,
+#line 16893
+        .trainerPic = TRAINER_PIC_CAMPER,
+        .encounterMusic_gender =
+#line 16895
+            TRAINER_ENCOUNTER_MUSIC_MALE,
+#line 16896
+        .battleType = TRAINER_BATTLE_TYPE_SINGLES,
+#line 16897
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16899
+            .species = SPECIES_WURMPLE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16901
+            .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
+#line 16900
+            .lvl = 5,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 16903
+    [DIFFICULTY_NORMAL][TRAINER_CAMPER_JIM] =
+    {
+#line 16904
+        .trainerName = _("JIM"),
+#line 16905
+        .trainerClass = TRAINER_CLASS_CAMPER,
+#line 16906
+        .trainerPic = TRAINER_PIC_CAMPER,
+        .encounterMusic_gender =
+#line 16908
+            TRAINER_ENCOUNTER_MUSIC_MALE,
+#line 16909
+        .battleType = TRAINER_BATTLE_TYPE_SINGLES,
+#line 16910
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16912
+            .species = SPECIES_WURMPLE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16914
+            .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
+#line 16913
+            .lvl = 5,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 16916
+    [DIFFICULTY_NORMAL][TRAINER_SAD_LASS] =
+    {
+#line 16917
+        .trainerName = _("SADGIRL"),
+#line 16918
+        .trainerClass = TRAINER_CLASS_LASS,
+#line 16919
+        .trainerPic = TRAINER_PIC_LASS,
+        .encounterMusic_gender =
+#line 16920
+F_TRAINER_FEMALE | 
+#line 16921
+            TRAINER_ENCOUNTER_MUSIC_FEMALE,
+#line 16922
+        .battleType = TRAINER_BATTLE_TYPE_SINGLES,
+#line 16923
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16925
+            .species = SPECIES_WURMPLE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16927
+            .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
+#line 16926
+            .lvl = 5,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },

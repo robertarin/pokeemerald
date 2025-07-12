@@ -34,6 +34,7 @@
     "gMapGroup_IndoorRoute123",
     "gMapGroup_IndoorRoute119",
     "gMapGroup_IndoorRoute124",
+    "gMapGroup_IndoorRoute201",
     "gMapGroup_IndoorSuncloak"
   ],
   "gMapGroup_TownsAndRoutes": [
@@ -94,7 +95,8 @@
     "Underwater_Route129",
     "Underwater_Route105",
     "Underwater_Route125",
-    "SuncloakTown"
+    "SuncloakTown",
+    "Route201"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -433,7 +435,8 @@
     "AlteringCave",
     "MeteorFalls_StevensCave",
     "SuncloakDepths_Entrance",
-    "SuncloakDepths_B1F"
+    "SuncloakDepths_B1F",
+    "Route201_Cave"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",
@@ -624,6 +627,9 @@
   ],
   "gMapGroup_IndoorRoute124": [
     "Route124_DivingTreasureHuntersHouse"
+  ],
+  "gMapGroup_IndoorRoute201": [
+    "Route201_House1"
   ],
   "gMapGroup_IndoorSuncloak": [
     "SuncloakTown_PlayerHouse",

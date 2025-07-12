@@ -1167,3 +1167,6 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/SuncloakDepths_B1F/scripts.inc"
 	.include "data/maps/SuncloakTown_PlayerHouse_B1F/scripts.inc"
 	.include "data/text/coal_speech.inc"
+	.include "data/maps/Route201/scripts.inc"
+	.include "data/maps/Route201_House1/scripts.inc"
+	.include "data/maps/Route201_Cave/scripts.inc"
